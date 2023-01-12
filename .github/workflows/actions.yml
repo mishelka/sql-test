@@ -25,6 +25,9 @@ jobs:
       - name: install psycopg2 library
         run:
           pip3 install psycopg2-binary
-      - name: execute py script # run the run.py to get the latest data
+      - name: execute py script
         run:
-          python /src/files/_test.py
+          python ./src/files/_test.py
+      - name: execute py script 2
+        run:
+          python ./../../src/files/_test.py
