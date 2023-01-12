@@ -10,12 +10,15 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8 #install the python needed
+      - name: update apt-get
+        run: apt-get update
+      - name: install pg server
+        run: sudo apt-get install postgresql-server-dev-all
+      - name: install pg client
+        run: apt-get install --yes --no-install-recommends postgresql-client
+      - name: install psycopg2 library
+        run: pip3 install psycopg2-binary
       - name: execute py script # run the run.py to get the latest data
-        run:
-          apt-get update
-          apt-get install --yes --no-install-recommends postgresql-client
-          sudo apt-get install postgresql-server-dev-all
-          pip3 install psycopg2-binary
-          python src/files/_test.py
+        run: python src/files/_test.py
         env:
       - name: export index
