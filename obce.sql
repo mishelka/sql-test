@@ -1,10 +1,10 @@
 SET synchronous_commit TO off;
 
--- DROP USER IF EXISTS starosta;
+DROP USER IF EXISTS starosta;
 CREATE USER starosta WITH PASSWORD 'p4ssw0rd';
 DROP DATABASE IF EXISTS obce;
--- CREATE DATABASE obce OWNER starosta;
-CREATE DATABASE obce OWNER postgres;
+CREATE DATABASE obce OWNER starosta;
+-- CREATE DATABASE obce OWNER postgres;
 
 \c obce
 

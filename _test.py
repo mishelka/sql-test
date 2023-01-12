@@ -64,8 +64,8 @@ def dbconn():
     conn = psycopg2.connect(
         host='localhost',
         dbname='obce',
-        user='postgres',
-        password='postgres',
+        user='starosta',
+        password='p4ssw0rd7',
         port=5432
     )
 
