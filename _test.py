@@ -68,6 +68,7 @@ def dbconn():
         password='p4ssw0rd',
         port=5432
     )
+    return conn
 
 
 # print('Cleaning database...')
@@ -87,8 +88,15 @@ for file in os.listdir():
 # print(results)
 
 print('Connecting to database')
-dbconn()
+conn = dbconn()
+cur = conn.cursor()
+print('Connected to db obce')
 
 print('Running tests')
 for r in results:
-    break
+    print(r)
+    cur.execute(r[0])
+    print(cur.fetchone())
+
+cur.close()
+conn.close()
