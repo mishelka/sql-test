@@ -71,7 +71,7 @@ def dbconn():
 
 
 print('Cleaning database...')
-# cleandb()
+cleandb()
 
 print('Parsing results...')
 results = {}
