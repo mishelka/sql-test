@@ -27,4 +27,4 @@ jobs:
           pip3 install psycopg2-binary
       - name: execute py script 2
         run:
-          python src/_test.py
+          python _test.py
