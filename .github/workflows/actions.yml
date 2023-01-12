@@ -21,9 +21,9 @@ jobs:
           sudo -u postgres psql
       - name: create db
         run: |
-          SET PGCLIENTENCODING=utf-8
-          chcp 65001
-          /usr/local/bin/psql -U postgres < obce.sql
+          sudo SET PGCLIENTENCODING=utf-8
+          sudo chcp 65001
+          sudo psql -U postgres < obce.sql
       - name: install psycopg2 library
         run:
           pip3 install psycopg2-binary
