@@ -74,7 +74,7 @@ print('Cleaning database...')
 
 print('Parsing results...')
 results = {}
-for file in os.listdir('files'):
+for file in os.listdir(path):
     if file.endswith('.sql'):
         filepath = os.path.join(path, file)
         tasks = readsqlscript(filepath)
