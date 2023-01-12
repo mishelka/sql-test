@@ -10,9 +10,9 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8 #install the python needed
-      - name: update apt-get
-        run:
-          apt-get update
+#      - name: update apt-get
+#        run:
+#          apt-get update
       - name: install pg server
         run:
           sudo apt-get install postgresql-server-dev-all
