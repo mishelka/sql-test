@@ -65,7 +65,7 @@ def dbconn():
         host='localhost',
         dbname='obce',
         user='starosta',
-        password='p4ssw0rd7',
+        password='p4ssw0rd',
         port=5432
     )
 
