@@ -95,7 +95,7 @@ print('Connected to db obce')
 print('Running tests')
 for r in results:
     print(r)
-    cur.execute(r[0])
+    cur.execute(results[r])
     print(cur.fetchone())
 
 cur.close()
