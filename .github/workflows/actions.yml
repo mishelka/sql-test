@@ -20,8 +20,7 @@ jobs:
           service postgresql status
           sudo -u postgres psql
       - name: create db
-        run: |
-          sudo chcp 65001
+        run:
           sudo psql -U postgres < obce.sql
       - name: install psycopg2 library
         run:
