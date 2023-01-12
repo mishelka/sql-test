@@ -10,12 +10,15 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8 #install the python needed
-#      - name: update apt-get
-#        run:
-#          apt-get update
-      - name: install pg server
+      - name: update apt
         run:
-          sudo apt-get install postgresql-server-dev-all
+          sudo apt update
+      - name: install pg contrib
+        run:
+          sudo apt install postgresql postgresql-contrib
+      - name: start sql service
+        run:
+          sudo systemctl start postgresql.service
       - name: install pg client
         run:
           apt-get install --yes --no-install-recommends postgresql-client
