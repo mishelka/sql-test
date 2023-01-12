@@ -1,7 +1,7 @@
 import os
 import re
 import subprocess
-# import psycopg2
+import psycopg2
 
 path = os.path.join('.', 'files')
 os.chdir(path)
@@ -60,14 +60,14 @@ def printtasks(tasks):
         print(key, '. ', value)
 
 
-# def dbconn():
-#     conn = psycopg2.connect(
-#         host='localhost',
-#         dbname='For_Practice',
-#         user='postgres',
-#         password='[Password]',
-#         port=5432
-#     )
+def dbconn():
+    conn = psycopg2.connect(
+        host='localhost',
+        dbname='For_Practice',
+        user='starosta',
+        password='p4ssw0rd',
+        port=5432
+    )
 
 
 print('Cleaning database...')
@@ -75,10 +75,8 @@ print('Cleaning database...')
 
 print('Parsing results...')
 results = {}
-print(os.getcwd())
-print(os.listdir('.'))
 
-for file in os.listdir('.'):
+for file in os.listdir():
     if file.endswith('.sql'):
         filepath = os.path.join(path, file)
         tasks = readsqlscript(filepath, file)
@@ -87,6 +85,9 @@ for file in os.listdir('.'):
         # printtasks(tasks)
 
 # print(results)
+
+print('Connecting to database')
+dbconn()
 
 print('Running tests')
 for r in results:
