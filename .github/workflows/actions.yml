@@ -21,7 +21,7 @@ jobs:
           sudo -u postgres psql
       - name: create db
         run:
-          sudo psql -U postgres < obce.sql
+          sudo -u postgres psql < obce.sql
       - name: install psycopg2 library
         run:
           pip3 install psycopg2-binary
