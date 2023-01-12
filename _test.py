@@ -78,7 +78,7 @@ results = {}
 print(os.getcwd())
 print(os.listdir('.'))
 
-for file in os.listdir(path):
+for file in os.listdir('.'):
     if file.endswith('.sql'):
         filepath = os.path.join(path, file)
         tasks = readsqlscript(filepath, file)
