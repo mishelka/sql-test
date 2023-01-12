@@ -14,10 +14,10 @@ def cleandb():
     print('Cleaning database successful...')
 
 
-def readsqlscript(filepath):
+def readsqlscript(filepath, file):
     print('reading: {}'.format(filepath))
 
-    with open(filepath, 'r', encoding='utf8') as f:
+    with open(file, 'r', encoding='utf8') as f:
         filelines = (line.strip() for line in f)  # All lines including the blank ones
         filelines = list(line for line in filelines if line)  # Non-blank lines
 
@@ -74,10 +74,12 @@ print('Cleaning database...')
 
 print('Parsing results...')
 results = {}
+print(os.listdir(path))
+
 for file in os.listdir(path):
     if file.endswith('.sql'):
         filepath = os.path.join(path, file)
-        tasks = readsqlscript(filepath)
+        tasks = readsqlscript(filepath, file)
         title = file.replace('.sql', '')
         results[title] = tasks
         # printtasks(tasks)
