@@ -27,4 +27,4 @@ jobs:
           pip3 install psycopg2-binary
       - name: execute py script # run the run.py to get the latest data
         run:
-          python src/files/_test.py
+          python /src/files/_test.py
