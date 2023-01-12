@@ -19,6 +19,11 @@ jobs:
           sudo systemctl start postgresql.service
           service postgresql status
           sudo -u postgres psql
+      - name: create db
+        run: |
+          SET PGCLIENTENCODING=utf-8
+          chcp 65001
+          psql -U postgres < obce.sql
       - name: install psycopg2 library
         run:
           pip3 install psycopg2-binary

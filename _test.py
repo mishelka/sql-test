@@ -70,8 +70,8 @@ def dbconn():
     )
 
 
-print('Cleaning database...')
-cleandb()
+# print('Cleaning database...')
+# cleandb()
 
 print('Parsing results...')
 results = {}
