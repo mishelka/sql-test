@@ -11,11 +11,11 @@ jobs:
         with:
           python-version: 3.8 #install the python needed
       - name: update apt
-        run:
+        run: |
           sudo apt update
           sudo apt install postgresql postgresql-contrib
       - name: start pgsql
-        run:
+        run: |
           sudo systemctl start postgresql.service
           service postgresql status
           sudo -u postgres psql
