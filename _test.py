@@ -15,6 +15,7 @@ def cleandb():
 
 
 def readsqlscript(filepath, file):
+
     print('reading: {}'.format(filepath))
 
     with open(file, 'r', encoding='utf8') as f:
@@ -74,7 +75,8 @@ print('Cleaning database...')
 
 print('Parsing results...')
 results = {}
-print(os.listdir(path))
+print(os.getcwd())
+print(os.listdir('.'))
 
 for file in os.listdir(path):
     if file.endswith('.sql'):
