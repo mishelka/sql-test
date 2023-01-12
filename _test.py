@@ -63,7 +63,7 @@ def printtasks(tasks):
 def dbconn():
     conn = psycopg2.connect(
         host='localhost',
-        dbname='For_Practice',
+        dbname='obce',
         user='postgres',
         password='postgres',
         port=5432
