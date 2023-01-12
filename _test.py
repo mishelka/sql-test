@@ -10,7 +10,7 @@ os.chdir(path)
 def cleandb():
     # FNULL = open(os.devnull, 'w')  # use this if you want to suppress output to stdout from the subprocess
     # subprocess.call('cleandb.bat', shell=False, stdout=FNULL, stderr=FNULL)
-    subprocess.call(['sh', 'cleandb.sh'], shell=True)#, stdout=FNULL, stderr=FNULL)
+    subprocess.call(['sh', 'cleandb.sh'], check=True, capture_output=True)
     print('Cleaning database successful...')
 
 
