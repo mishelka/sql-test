@@ -13,24 +13,12 @@ jobs:
       - name: update apt
         run:
           sudo apt update
-      - name: install pg contrib
-        run:
           sudo apt install postgresql postgresql-contrib
-      - name: start pgsql service
-        run:
-            sudo systemctl start postgresql
-      - name: get pgsql status
-        run:
-            service postgresql status
-      - name: get port
-        run:
-            sudo -u postgres psql
-      - name: start sql service
+      - name: start pgsql
         run:
           sudo systemctl start postgresql.service
-      - name: install pg client
-        run:
-          sudo apt-get install --yes --no-install-recommends postgresql-client
+          service postgresql status
+          sudo -u postgres psql
       - name: install psycopg2 library
         run:
           pip3 install psycopg2-binary
