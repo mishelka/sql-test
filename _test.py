@@ -3,7 +3,7 @@ import re
 import subprocess
 # import psycopg2
 
-path = "./files"
+path = ".\\files"
 os.chdir(path)
 
 
