@@ -8,7 +8,7 @@ os.chdir(path)
 
 
 def cleandb():
-    FNULL = open(os.devnull, 'w')  # use this if you want to suppress output to stdout from the subprocess
+    # FNULL = open(os.devnull, 'w')  # use this if you want to suppress output to stdout from the subprocess
     # subprocess.call('cleandb.bat', shell=False, stdout=FNULL, stderr=FNULL)
     subprocess.call(['sh', 'cleandb.sh'], shell=True)#, stdout=FNULL, stderr=FNULL)
     print('Cleaning database successful...')
@@ -64,8 +64,8 @@ def dbconn():
     conn = psycopg2.connect(
         host='localhost',
         dbname='For_Practice',
-        user='starosta',
-        password='p4ssw0rd',
+        user='postgres',
+        password='postgres',
         port=5432
     )
 

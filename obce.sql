@@ -3,7 +3,8 @@ SET synchronous_commit TO off;
 -- DROP USER IF EXISTS starosta;
 CREATE USER starosta WITH PASSWORD 'p4ssw0rd';
 DROP DATABASE IF EXISTS obce;
-CREATE DATABASE obce OWNER starosta;
+-- CREATE DATABASE obce OWNER starosta;
+CREATE DATABASE obce OWNER postgres;
 
 \c obce
 
@@ -14775,4 +14776,5 @@ INSERT INTO populacia  VALUES( 2009, 544035, 335, 328 );
 INSERT INTO populacia  VALUES( 2009, 544043, 232, 246 );
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO starosta;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO postgres;
 \q
