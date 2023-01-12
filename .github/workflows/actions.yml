@@ -21,7 +21,7 @@ jobs:
           sudo systemctl start postgresql.service
       - name: install pg client
         run:
-          apt-get install --yes --no-install-recommends postgresql-client
+          sudo apt-get install --yes --no-install-recommends postgresql-client
       - name: install psycopg2 library
         run:
           pip3 install psycopg2-binary
