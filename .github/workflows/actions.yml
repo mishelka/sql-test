@@ -16,6 +16,12 @@ jobs:
       - name: install pg contrib
         run:
           sudo apt install postgresql postgresql-contrib
+      - name: get pgsql status
+        run:
+            service postgresql status
+      - name: get port
+        run:
+            sudo -u postgres psql
       - name: start sql service
         run:
           sudo systemctl start postgresql.service
