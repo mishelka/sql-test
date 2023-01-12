@@ -3,7 +3,7 @@ import re
 import subprocess
 # import psycopg2
 
-path = os.path.join('.', 'files')
+path = os.path.join('files')
 os.chdir(path)
 
 
@@ -74,7 +74,7 @@ print('Cleaning database...')
 
 print('Parsing results...')
 results = {}
-for file in os.listdir():
+for file in os.listdir('files'):
     if file.endswith('.sql'):
         filepath = os.path.join(path, file)
         tasks = readsqlscript(filepath)
