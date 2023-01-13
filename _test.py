@@ -96,12 +96,19 @@ print('Running tests')
 for r in results:
     print('#########', r, '#########')
     for task in results[r]:
+        if conn is None:
+            conn = dbconn()
+            cur = conn.cursor()
         try:
             print('>>>> Task ', task)
             cur.execute(results[r][task])
             print('<<<<<', task, 'SUCCESS')
-        except (Exception, psycopg2.Error) as error:
-            print('<<<<< Error executing', error)
+        #     InterfaceError, DatabaseError, DataError, OperationalError, IntegrityError, InternalError, ProgrammingError, and NotSupportedError
+        except Exception as error:
+            print('<<<<<', task, 'Error executing', error)
+            cur.close()
+            conn.close()
+            conn = None
         print(cur.fetchone())
 
 cur.close()
