@@ -168,7 +168,6 @@ for r in results:
             cur.close()
             conn.close()
             conn = None
-        print(cur.fetchone())
 
 cur.close()
 conn.close()
