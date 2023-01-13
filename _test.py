@@ -175,6 +175,7 @@ def checktask(task, dbcursor):
     else:
         print('!!!unknown task')
     print('\t\t\t>>>> ', record)
+    return 0
 
 
 # print('Cleaning database...')
@@ -208,8 +209,8 @@ for r in results:
         try:
             print('\t>>>> Task ', task)
             cur.execute(results[r][task])
-            checktask(task, cur)
-            print('\t<<<<<', task, 'SUCCESS')
+            res = checktask(task, cur)
+            print('\t<<<<<', task, 'SUCCESS (', res, ')')
         #     InterfaceError, DatabaseError, DataError, OperationalError, IntegrityError, InternalError, ProgrammingError, and NotSupportedError
         except Exception as error:
             print('\t<<<<<', task, 'Error executing', error)
