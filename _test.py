@@ -94,9 +94,14 @@ print('Connected to db obce')
 
 print('Running tests')
 for r in results:
-    print(r)
+    print('#########', r, '#########')
     for task in results[r]:
-        cur.execute(results[r][task])
+        try:
+            print('>>>> Task ', task)
+            cur.execute(results[r][task])
+            print('<<<<<', task, 'SUCCESS')
+        except (Exception, psycopg2.Error) as error:
+            print('<<<<< Error executing', error)
         print(cur.fetchone())
 
 cur.close()
