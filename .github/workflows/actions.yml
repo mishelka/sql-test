@@ -25,6 +25,6 @@ jobs:
       - name: install psycopg2 library
         run:
           pip3 install psycopg2-binary
-      - name: execute py script 2
+      - name: TEST THE RESULTS
         run:
           python _test.py

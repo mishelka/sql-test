@@ -229,7 +229,7 @@ def checktask(_task, dbcursor):
 print('Parsing results...')
 results = {}
 
-for file in os.listdir():
+for file in sorted(os.listdir()):
     if file.endswith('.sql'):
         filepath = os.path.join(path, file)
         tasks = readsqlscript(filepath, file)
