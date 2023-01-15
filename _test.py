@@ -86,7 +86,7 @@ def checktask(_task, dbcursor):
         print('\t record one: ', record)
         if record[0] == 100: return 3
         record = dbcursor.fetchall()
-        # print('\t record all: ', record)
+        print('\t record all length: ', len(record))
         if len(record) == 100: return 2
     elif _task == 1.2:
         # 1b ktorý názov obce je použitý najviac.
@@ -107,7 +107,7 @@ def checktask(_task, dbcursor):
         print('\t record one: ', record)
         if record[0] == 11: return 3
         record = dbcursor.fetchall()
-        print('\t record all: ', record)
+        print('\t record all length: ', len(record))
         if len(record) == 11: return 2
     elif _task== 3:
         # A koľko má košický kraj obcí? Pri tvorbe dopytu vám môže pomôcť informácia, že Trenčiansky kraj má spolu 276 obcí.
@@ -117,7 +117,7 @@ def checktask(_task, dbcursor):
         print('\t record one: ', record)
         record = dbcursor.fetchall()
         if len(record) == 461: return 2
-        # print('\t record all: ', record)
+        print('\t record all length: ', len(record))
     elif _task == 4:
         # Zistite, ktorá obec (mesto) bola na Slovensku najväčšia v roku 2012.
         # Pri tvorbe dopytu vám môže pomôcť informácia, že táto obec (mesto) bola najväčšia na Slovensku v rokoch 2009-2012,
@@ -140,7 +140,8 @@ def checktask(_task, dbcursor):
         # Odpoveď: 58450
         record = dbcursor.fetchone()
         print('\t record one: ', record)
-        if record[0] == 58450: return 3
+        for r in record:
+            if record[r] == 58450: return 3
     elif _task == 6:
         # Ako sme na tom na Slovensku? Vymierame alebo rastieme?
         # Zobrazte trend vývoja populácie za jednotlivé roky a výsledok zobrazte od najnovších informácií po najstaršie.
@@ -150,7 +151,9 @@ def checktask(_task, dbcursor):
         print('\t>>>>>>task 6 does not have a test yet')
     elif _task == 7:
         # Zistite, ktorá obec bola najmenšia v okrese Tvrdošín v roku 2011.
-        # Pri tvorbe dopytu vám môže pomôcť informácia, že v okrese Ružomberok to bola v roku 2012 obec Potok s počtom obyvateľov 107.
+        # Pri tvorbe dopytu vám môže pomôcť informácia,
+        # že v okrese Ružomberok to bola v roku 2012 obec
+        # Potok s počtom obyvateľov 107.
         # Odpoveď: Štefanov nad Oravou a Čimhová (659)
         record = dbcursor.fetchall()
         print('\t record all: ', record)
@@ -170,39 +173,50 @@ def checktask(_task, dbcursor):
             if stefanov or cimhova or num: return 1.5
         return 0
     elif _task == 8:
-        # Zistite všetky obce, ktoré mali v roku 2010 počet obyvateľov do 5000. Pri tvorbe dopytu vám môže pomôcť informácia, že v roku 2009 bolo týchto obcí o 1 viac ako v roku 2009.
+        # Zistite všetky obce, ktoré mali v roku 2010 počet obyvateľov do 5000.
+        # Pri tvorbe dopytu vám môže pomôcť informácia, že v roku 2009 bolo týchto obcí o
+        # 1 viac ako v roku 2009.
         # Odpoveď: obcí je spolu 2774
         record = dbcursor.fetchall()
-        # print('\t record all: ', record)
+        print('\t record all length', len(record))
         if len(record) == 2774: return 3
     elif _task == 9:
         # Zistite 10 obcí s populáciou nad 20000, ktoré mali v roku 2012 najväčší pomer žien voči mužom (viac žien v obci ako mužov). Týchto 10 obcí vypíšte v poradí od najväčšieho pomeru po najmenší. Vo výsledku okrem názvu obce vypíšte aj pomer zaokrúhlený na 4 desatinné miesta. Pri tvorbe dopytu vám môže pomôcť informácia,
         # že v roku 2011 bol tento pomer pre obec Košice  - Juh 1,1673.
         record = dbcursor.fetchall()
-        # print('\t record all: ', record)
+        print('\t record all length: ', len(record))
         if len(record) != 10: return 0
     elif _task == 10:
-        # Vypíšte sumárne informácie o stave Slovenska v roku 2012 v podobe tabuľky, ktorá bude obsahovať pre každý kraj informácie o počte obyvateľov, o počte obcí a počte okresov.
+        # Vypíšte sumárne informácie o stave Slovenska v roku 2012 v podobe tabuľky, ktorá bude obsahovať
+        # pre každý kraj informácie o počte obyvateľov, o počte obcí a počte okresov.
         # ?
         record = dbcursor.fetchall()
-        print('\t record all: ', record)
+        print('\t record all (test visually I guess): ', record)
         print(record)
     elif _task == 11:
         # To, že či vymierame alebo rastieme, sme už zisťovali.
-        # Ale ktoré obce sú na tom naozaj zle? Kde by sa nad touto otázkou mali naozaj zamyslieť? Zobrazte obce, ktoré majú klesajúci trend (rozdiel v populácii dvoch posledných rokov je menší ako 0) - vypíšte ich názov, počet obyvateľov v poslednom roku, počet obyvateľov v predchádzajúcom roku a rozdiel v populácii posledného oproti predchádzajúcemu roku. Zoznam utrieďte vzostupne podľa tohto rozdielu od obcí s najmenším prírastkom obyvateľov po najväčší.
+        # Ale ktoré obce sú na tom naozaj zle?
+        # Kde by sa nad touto otázkou mali naozaj zamyslieť?
+        # Zobrazte obce, ktoré majú klesajúci trend (rozdiel v populácii dvoch
+        # posledných rokov je menší ako 0) - vypíšte ich názov, počet obyvateľov
+        # v poslednom roku, počet obyvateľov v predchádzajúcom roku a rozdiel
+        # v populácii posledného oproti predchádzajúcemu roku. Zoznam utrieďte
+        # vzostupne podľa tohto rozdielu od obcí s najmenším prírastkom obyvateľov
+        # po najväčší.
         # Odpoveď: obcí je 1307
         record = dbcursor.fetchall()
-        # print('\t record all: ', record)
+        print('\t record all length: ', len(record))
         if len(record) == 1307: return 3
     elif _task == 12:
-        # Zistite počet obcí, ktorých počet obyvateľov v roku 2012 je nižší, ako bol slovenský priemer v danom roku.
+        # Zistite počet obcí, ktorých počet obyvateľov v roku 2012 je nižší,
+        # ako bol slovenský priemer v danom roku.
         # Odpoveď: obcí je 2433
         record = dbcursor.fetchone()
         print('\t record one: ', record)
         if record[0] == 2433: return 3
         record = dbcursor.fetchall()
-        # print('\t record all: ', record)
-        if len(record) == 2433: return 3
+        print('\t record all length: ', len(record))
+        if len(record) == 2433: return 2
     else:
         print('!!!UNKNOWN TASK')
     print('\t\t\t>>>> ', record)
