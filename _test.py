@@ -98,16 +98,17 @@ def checktask(_task, dbcursor):
         # Odpoveď: Porubka, Lucka (4)
         record = dbcursor.fetchall()
         print(f'\t record all length: {len(record)}')
+        if len(record) != 2: return 0
+        print(f'\t records: {record}')
+
         por, luc = False, False
         for r in record:
             print(r)
             for c in r:
                 if c == 'Porubka': por = True
                 if c == 'Lucka': luc = True
-        if len(record) == 2: print(f'\t records: {record}')
-        if len(record) == 2 and por and luc: return 3
+        if por and luc: return 3
         if (por and not luc) or (not por and luc): return 2
-        if len(record) > 2 or (not luc and not por): return 0
     elif _task == 2:
         # Koľko okresov sa nachádza v košickom kraji?
         # Odpoveď: 11
