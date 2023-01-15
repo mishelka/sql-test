@@ -180,12 +180,13 @@ def checktask(_task, dbcursor):
                     break
             if foundNames == 4:
                 for c in r:
+                    print(f'searching value: {c}')
                     for v in task6results.values():
-                        print(c, v)
+                        sys.stdout.write(f'\t{v}; ')
                         if c == v:
-                            print('VALUE FOUND')
+                            sys.stdout.write('[VALUE FOUND]')
                             foundValues += 1
-                            break
+                    print()
         if foundNames >= 4 and foundValues >= 4: return 3
         if foundNames >= 4: return 1
     elif _task == 7:
@@ -252,7 +253,6 @@ def checktask(_task, dbcursor):
                     if isinstance(c, Decimal) and float(c) in task9results.values():
                         print('value found')
                         valuesfound += 1
-                        break
         if namesfound >= 10 and valuesfound >= 10: return 3
         if namesfound >= 10: return 1
     elif _task == 10:
