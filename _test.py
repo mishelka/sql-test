@@ -375,15 +375,15 @@ for result in results:
             conn = dbconn()
             cur = conn.cursor()
         try:
-            print(f'>>>> Task {task} - {result}')
+            print(f'>>>> Task {task} by author {result}')
             cur.execute(results[result][task])
             res = checktask(task, cur)
             if res == 0:
-                print(f'\t<<<<< {task} FAIL')
+                print(f'\tTASK {task} RESULT: FAIL')
             else:
-                print(f'\t<<<<< {task} SUCCESS ({str(res)}b)')
+                print(f'\tTASK {task} RESULT: {str(res)}b')
         except Exception as error:
-            print(f'\t<<<<< {task} ERROR EXECUTING: {error}')
+            print(f'\tTASK {task} RESULT: ERROR EXECUTING: {error}')
             cur.close()
             conn.close()
             conn = None
