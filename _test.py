@@ -187,6 +187,7 @@ def checktask(_task, dbcursor):
         # ?
         record = dbcursor.fetchall()
         foundyears, foundvalues, lineindex, issorted = 0, 0, 0, True
+        print(record)
         if len(record) != 4: return 0
 
         for line in record:
