@@ -243,9 +243,10 @@ def checktask(_task, dbcursor):
                     break
             if found == 10:
                 for c in r:
-                    if c in task9results.values():
+                    if float(c) in task9results.values():
                         print('value found')
                         found -= 1
+        if found == 10: return 1 #only names were found
         if found == 0: return 3
     elif _task == 10:
         # Vypíšte sumárne informácie o stave Slovenska v roku 2012 v podobe tabuľky,
