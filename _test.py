@@ -83,7 +83,7 @@ def checktask(_task, dbcursor):
         # 1a kolko je takych obci
         # vysledok je 100
         record = dbcursor.fetchall()
-        print('\t', record, record)
+        # print('\t', record, record)
         print('\t record all length: ', len(record))
         if len(record) == 100: return 2
     elif _task == 1.2:
@@ -189,7 +189,7 @@ def checktask(_task, dbcursor):
         # pre každý kraj informácie o počte obyvateľov, o počte obcí a počte okresov.
         # ?
         record = dbcursor.fetchall()
-        print('\t record all (test visually I guess): ', record)
+        # print('\t record all (test visually I guess): ', record)
         print(record)
     elif _task == 11:
         # To, že či vymierame alebo rastieme, sme už zisťovali.
