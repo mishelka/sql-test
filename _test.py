@@ -183,14 +183,14 @@ def checktask(_task, dbcursor):
         # že v roku 2011 bol tento pomer pre obec Košice  - Juh 1,1673.
         record = dbcursor.fetchall()
         print('\t record all length: ', len(record))
-        if len(record) != 10: return 0
+        if len(record) == 10: return 3
     elif _task == 10:
         # Vypíšte sumárne informácie o stave Slovenska v roku 2012 v podobe tabuľky, ktorá bude obsahovať
         # pre každý kraj informácie o počte obyvateľov, o počte obcí a počte okresov.
         # ?
         record = dbcursor.fetchall()
         # print('\t record all (test visually I guess): ', record)
-        print(record)
+        # print(record)
     elif _task == 11:
         # To, že či vymierame alebo rastieme, sme už zisťovali.
         # Ale ktoré obce sú na tom naozaj zle?
