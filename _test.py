@@ -83,11 +83,13 @@ def checktask(_task, dbcursor):
         # 1a kolko je takych obci
         # vysledok je 100
         record = dbcursor.fetchall()
-        # print('\t', record, record)
-        print('\t record all length: ', len(record))
-        if len(record) == 100: return 2
+        if len(record) == 100:
+            print('\t record all length: ', len(record))
+            return 2
         if len(record) == 1:
-            print('\t one record:', record)
+            print('\t result one: ', record)
+            for r in record:
+                if record[r] == 100: return 3
     elif _task == 1.2:
         # 1b ktorý názov obce je použitý najviac.
         # Odpoveď: Porubka, Lucka (4)
@@ -97,18 +99,21 @@ def checktask(_task, dbcursor):
         for c in record:
             if c == 'Porubka': por = True
             if c == 'Lucka': luc = True
+        if len(record) == 2: print('\t records: ', record)
         if len(record) == 2 and por and luc: return 3
         if (por and not luc) or (not por and luc): return 2
         if len(record) > 2 or (not luc and not por): return 0
     elif _task == 2:
         # Koľko okresov sa nachádza v košickom kraji?
         # Odpoveď: 11
-        record = dbcursor.fetchone()
-        print('\t record one: ', record)
-        if record[0] == 11: return 3
         record = dbcursor.fetchall()
-        print('\t record all length: ', len(record))
-        if len(record) == 11: return 2
+        if len(record) == 11:
+            print('\t record all length: ', len(record))
+            return 2
+        if len(record) == 1:
+            print('\t record one: ', record[0])
+            for r in record:
+                if record[r] == 11: return 3
     elif _task== 3:
         # A koľko má košický kraj obcí? Pri tvorbe dopytu vám môže pomôcť informácia, že Trenčiansky kraj má spolu 276 obcí.
         # Odpoveď: 461
