@@ -198,12 +198,11 @@ def checktask(_task, dbcursor):
                         issorted = False
                     break
             lineindex += 1
-        if foundyears == 4:
-            for line in record:
-                for col in line:
-                    if col in list(task6results.values()):
-                        foundvalues += 1
-                        break
+        for line in record:
+            for col in line:
+                if col in list(task6results.values()):
+                    foundvalues += 1
+                    break
         print(f'found names: {foundyears}, values: {foundvalues}')
         points = 3
         if not issorted: points -= 0.5
