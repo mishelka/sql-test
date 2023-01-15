@@ -96,9 +96,10 @@ def checktask(_task, dbcursor):
         record = dbcursor.fetchall()
         print('\t record all length: ', len(record))
         por, luc = False, False
-        for c in record:
-            if c == 'Porubka': por = True
-            if c == 'Lucka': luc = True
+        for r in record:
+            for c in record:
+                if c == 'Porubka': por = True
+                if c == 'Lucka': luc = True
         if len(record) == 2: print('\t records: ', record)
         if len(record) == 2 and por and luc: return 3
         if (por and not luc) or (not por and luc): return 2
