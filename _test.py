@@ -88,8 +88,8 @@ def checktask(_task, dbcursor):
             return 2
         if len(record) == 1:
             print('\t result one: ', record)
-            for r in record:
-                if record[r] == 100: return 3
+            for c in record[0]:
+                if c == 100: return 3
     elif _task == 1.2:
         # 1b ktorý názov obce je použitý najviac.
         # Odpoveď: Porubka, Lucka (4)
