@@ -41,9 +41,9 @@ def readsqlscript(filepath, file):
                     t = currenttask.strip()
                     if t:
                         if linenum == 20:
-                            _tasks['1a'] = t
+                            _tasks[1.1] = t
                         elif linenum == 1:
-                            _tasks['1b'] = t
+                            _tasks[1.2] = t
                         else:
                             _tasks[linenum] = t
                 linenum = l
@@ -79,7 +79,7 @@ def dbconn():
 
 def checktask(task, dbcursor):
     record = ''
-    if task == '1a':
+    if task == 1.1:
         # 1a kolko je takych obci
         # vysledok je 100
         record = dbcursor.fetchone()
@@ -88,7 +88,7 @@ def checktask(task, dbcursor):
         record = dbcursor.fetchall()
         print('\t record all: ', record)
         if len(record) == 100: return 2
-    elif task == '1b':
+    elif task == 1.2:
         # 1b ktorý názov obce je použitý najviac.
         # Odpoveď: Porubka, Lucka (4)
         record = dbcursor.fetchone()
