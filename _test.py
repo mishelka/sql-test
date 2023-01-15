@@ -118,12 +118,14 @@ def checktask(_task, dbcursor):
     elif _task== 3:
         # A koľko má košický kraj obcí? Pri tvorbe dopytu vám môže pomôcť informácia, že Trenčiansky kraj má spolu 276 obcí.
         # Odpoveď: 461
-        record = dbcursor.fetchone()
-        if record[0] == 461: return 3
-        print('\t record one: ', record)
         record = dbcursor.fetchall()
-        if len(record) == 461: return 2
-        print('\t record all length: ', len(record))
+        if len(record) == 1:
+            print('\t record one: ', record[0])
+            for r in record:
+                if record[r] == 11: return 3
+        if len(record) == 461:
+            print('\t record length: ', len(record))
+            return 1.5
     elif _task == 4:
         # Zistite, ktorá obec (mesto) bola na Slovensku najväčšia v roku 2012.
         # Pri tvorbe dopytu vám môže pomôcť informácia, že táto obec (mesto) bola najväčšia na Slovensku v rokoch 2009-2012,
