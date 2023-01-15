@@ -57,6 +57,7 @@ def readsqlscript(filepath, file):
 
         f.close()
         _tasks = dict(sorted(_tasks.items()))
+        return _tasks
 
 
 
