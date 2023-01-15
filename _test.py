@@ -189,6 +189,7 @@ def checktask(_task, dbcursor):
         # pre každý kraj informácie o počte obyvateľov, o počte obcí a počte okresov.
         # ?
         record = dbcursor.fetchall()
+        return 0
         # print('\t record all (test visually I guess): ', record)
         # print(record)
     elif _task == 11:
