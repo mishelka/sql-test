@@ -217,21 +217,21 @@ def checktask(_task, dbcursor):
         }
         record = dbcursor.fetchall()
 
-        print(f'\t record all length: {len(record)}')
         found = 0
         if len(record) == 10:
             for r in record:
-                print(f'\t\t{r}')
-                sys.stdout.write('\t\t\t')
-                name = None
+                print(r)
                 for c in r:
                     if c in task9results.keys():
-                        name = c
-                        sys.stdout.write(f'name found: {name}, ')
+                        found += 1
+                        print('name found')
                         break
-                print()
-        print(len(task9results))
-        if len(task9results) == 0: return 3
+                if found == 10:
+                    for c in r:
+                        if c in task9results.values():
+                            print('value found')
+                            found -= 1
+        if found == 0: return 3
     elif _task == 10:
         # Vypíšte sumárne informácie o stave Slovenska v roku 2012 v podobe tabuľky,
         # ktorá bude obsahovať
