@@ -178,7 +178,8 @@ def checktask(_task, dbcursor):
                 if c in task6results.keys():
                     foundNames += 1
                     break
-            if foundNames == 4:
+        if foundNames == 4:
+            for r in record:
                 for c in r:
                     print(f'searching value: {c}')
                     for v in task6results.values():
@@ -246,9 +247,9 @@ def checktask(_task, dbcursor):
             for c in r:
                 if c in task9results.keys():
                     namesfound += 1
-                    print('name found')
                     break
-            if namesfound == 10:
+        if namesfound == 10:
+            for r in record:
                 for c in r:
                     if isinstance(c, Decimal) and float(c) in task9results.values():
                         print('value found')
