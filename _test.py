@@ -220,15 +220,15 @@ def checktask(_task, dbcursor):
         if len(record) == 10:
             for r in record:
                 name = None
-                for c in record:
+                for c in r:
                     if c in task9results.keys():
                         name = c
                         break
-                if name is None: return 0
-                for c in record:
-                    if c == task9results[name]:
-                        task9results.pop(name)
-                        break
+                if name is not None:
+                    for c in r:
+                        if c == task9results[name]:
+                            task9results.pop(name)
+                            break
         print(len(task9results))
         if len(task9results) == 0: return 3
     elif _task == 10:
