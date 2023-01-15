@@ -16,7 +16,7 @@ def cleandb():
 
 
 def readsqlscript(_filepath, _file):
-    print('\treading: {}'.format(_filepath))
+    print(f'\treading: {_filepath}')
 
     with open(_file, 'r', encoding='utf8') as f:
         filelines = (line.strip() for line in f)  # All lines including the blank ones
@@ -62,9 +62,9 @@ def readsqlscript(_filepath, _file):
 
 
 def printtasks(_tasks):
-    print('solved tasks: ', len(_tasks))
+    print(f'solved tasks: {len(_tasks)}')
     for key, value in _tasks.items():
-        print(key, '. ', value)
+        print(f'{key}. {value}')
 
 
 def dbconn():
@@ -85,23 +85,23 @@ def checktask(_task, dbcursor):
         # vysledok je 100
         record = dbcursor.fetchall()
         if len(record) == 100:
-            print('\t record all length: ', len(record))
+            print(f'\t record all length: {len(record)}')
             return 2
         if len(record) == 1:
-            print('\t result one: ', record)
+            print(f'\t result one: {record}')
             for c in record[0]:
                 if c == 100: return 3
     elif _task == 1.2:
         # 1b ktorý názov obce je použitý najviac.
         # Odpoveď: Porubka, Lucka (4)
         record = dbcursor.fetchall()
-        print('\t record all length: ', len(record))
+        print(f'\t record all length: {len(record)}')
         por, luc = False, False
         for r in record:
             for c in record:
                 if c == 'Porubka': por = True
                 if c == 'Lucka': luc = True
-        if len(record) == 2: print('\t records: ', record)
+        if len(record) == 2: print(f'\t records: {record}')
         if len(record) == 2 and por and luc: return 3
         if (por and not luc) or (not por and luc): return 2
         if len(record) > 2 or (not luc and not por): return 0
@@ -110,10 +110,10 @@ def checktask(_task, dbcursor):
         # Odpoveď: 11
         record = dbcursor.fetchall()
         if len(record) == 11:
-            print('\t record all length: ', len(record))
+            print(f'\t record all length: {len(record)}')
             return 2
         if len(record) == 1:
-            print('\t record one: ', record[0])
+            print(f'\t record one: {record[0]}')
             for c in record[0]:
                 print(c)
                 if c == 11: return 3
@@ -122,10 +122,10 @@ def checktask(_task, dbcursor):
         # Odpoveď: 461
         record = dbcursor.fetchall()
         if len(record) == 461:
-            print('\t record length: ', len(record))
+            print(f'\t record length: {len(record)}')
             return 1.5
         if len(record) == 1:
-            print('\t record one: ', record[0])
+            print(f'\t record one: {record[0]}')
             for c in record[0]:
                 print(c)
                 if c == 461: return 3
@@ -135,7 +135,7 @@ def checktask(_task, dbcursor):
         # avšak má v populácii klesajúcu tendenciu. Vo výsledku vypíšte jej názov a počet obyvateľov.
         # Odpoveď: Bratislava - Petržalka, 105468
         record = dbcursor.fetchone()
-        print('\t record one: ', record)
+        print(f'\t record one: {record}')
         ba = False
         num = False
         for c in record:
@@ -151,10 +151,10 @@ def checktask(_task, dbcursor):
         # Odpoveď: 58450
         record = dbcursor.fetchall()
         if len(record) == 58450:
-            print('\t record length: ', len(record))
+            print(f'\t record length: {len(record)}')
             return 1.5
         if len(record) == 1:
-            print('\t record: ', record[0])
+            print(f'\t record: {record[0]}')
             for c in record[0]:
                 print(c)
                 if c == 58450:
@@ -164,7 +164,7 @@ def checktask(_task, dbcursor):
         # Zobrazte trend vývoja populácie za jednotlivé roky a výsledok zobrazte od najnovších informácií po najstaršie.
         # ?
         # record = dbcursor.fetchall()
-        print('\t record all: ', record)
+        print(f'\t record all: {record}')
         print('\t>>>>>>task 6 does not have a test yet')
         return -1
     elif _task == 7:
@@ -174,12 +174,12 @@ def checktask(_task, dbcursor):
         # Potok s počtom obyvateľov 107.
         # Odpoveď: Štefanov nad Oravou a Čimhová (659)
         record = dbcursor.fetchall()
-        print('\t record all length: ', len(record))
+        print(f'\t record all length: {len(record)}')
         stefanov = False
         cimhova = False
         num = False
         if len(record) == 2:
-            print('\t record: ', record)
+            print(f'\t record: {record}')
             for r in record:
                 for c in r:
                     if c == 'Štefanov nad Oravou':
@@ -197,21 +197,45 @@ def checktask(_task, dbcursor):
         # 1 viac ako v roku 2009.
         # Odpoveď: obcí je spolu 2774
         record = dbcursor.fetchall()
-        print('\t record all length', len(record))
+        print(f'\t record all length {len(record)}')
         if len(record) == 2774: return 3
     elif _task == 9:
         # Zistite 10 obcí s populáciou nad 20000, ktoré mali v roku 2012 najväčší pomer žien voči mužom (viac žien v obci ako mužov). Týchto 10 obcí vypíšte v poradí od najväčšieho pomeru po najmenší. Vo výsledku okrem názvu obce vypíšte aj pomer zaokrúhlený na 4 desatinné miesta. Pri tvorbe dopytu vám môže pomôcť informácia,
         # že v roku 2011 bol tento pomer pre obec Košice  - Juh 1,1673.
+        task9results = {
+            'Bratislava - Ruzinov': 1.2103,
+            'Bratislava - Nove Mesto': 1.1989,
+            'Kosice - Juh': 1.163,
+            'Bratislava - Dubravka': 1.1628,
+            'Bratislava - Karlova Ves': 1.152,
+            'Kosice - Stare Mesto': 1.1437,
+            'Lucenec': 1.1432,
+            'Kosice - Sever': 1.1343,
+            'Bratislava - Podunajske Biskupice': 1.1301,
+            'Piestany': 1.1269
+        }
         record = dbcursor.fetchall()
-        print('\t record all length: ', len(record))
-        if len(record) == 10: return 3
+
+        print(f'\t record all length: {len(record)}')
+        if len(record) == 10:
+            for r in record:
+                name = None
+                value = False
+                for c in record:
+                    if c in task9results.keys():
+                        name = c
+                for c in record:
+                    if c == task9results[name]:
+                        task9results.pop(name)
+        print(len(task9results))
+        if len(task9results) == 0: return 3
     elif _task == 10:
         # Vypíšte sumárne informácie o stave Slovenska v roku 2012 v podobe tabuľky,
         # ktorá bude obsahovať
         # pre každý kraj informácie o počte obyvateľov, o počte obcí a počte okresov.
         # ?
         record = dbcursor.fetchall()
-        print('\t record all length: ', len(record))
+        print(f'\t record all length: {len(record)}')
         return -1
     elif _task == 11:
         # To, že či vymierame alebo rastieme, sme už zisťovali.
@@ -225,18 +249,20 @@ def checktask(_task, dbcursor):
         # po najväčší.
         # Odpoveď: obcí je 1307
         record = dbcursor.fetchall()
-        print('\t record all length: ', len(record))
+        print(f'\t record all length: {len(record)}')
         if len(record) == 1307: return 3
     elif _task == 12:
         # Zistite počet obcí, ktorých počet obyvateľov v roku 2012 je nižší,
         # ako bol slovenský priemer v danom roku.
         # Odpoveď: obcí je 2433
         record = dbcursor.fetchone()
-        print('\t record one: ', record)
+        print(f'\t record one: {record}')
         if record[0] == 2433: return 3
+        if record[0] == 2435: return 1.5
         record = dbcursor.fetchall()
-        print('\t record all length: ', len(record))
+        print(f'\t record all length: {len(record)}')
         if len(record) == 2433: return 2
+        if len(record) == 2435: return 1
     else:
         print('!!!UNKNOWN TASK')
     return 0
@@ -274,21 +300,21 @@ for result in results:
 
 print('Running tests')
 for result in results:
-    print('#########', result, '#########')
+    print(f'######### {result} #########')
     for task in results[result]:
         if conn is None:
             conn = dbconn()
             cur = conn.cursor()
         try:
-            print('>>>> Task', task, result)
+            print(f'>>>> Task {task} - {result}')
             cur.execute(results[result][task])
             res = checktask(task, cur)
             if res == 0:
-                print('\t<<<<<', task, 'FAIL')
+                print(f'\t<<<<< {task} FAIL')
             else:
-                print('\t<<<<<', task, 'SUCCESS (', str(res) + 'b', ')')
+                print(f'\t<<<<< {task} SUCCESS ({str(res)}b)')
         except Exception as error:
-            print('\t<<<<<', task, 'ERROR EXECUTING', error)
+            print(f'\t<<<<< {task} ERROR EXECUTING: {error}')
             cur.close()
             conn.close()
             conn = None
