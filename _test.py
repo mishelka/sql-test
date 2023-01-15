@@ -218,7 +218,6 @@ def checktask(_task, dbcursor):
         if len(record) == 2433: return 2
     else:
         print('!!!UNKNOWN TASK')
-    print('\t\t\t>>>> ', record)
     return 0
 
 
