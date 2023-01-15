@@ -138,8 +138,7 @@ def checktask(_task, dbcursor):
         # Odpoveď: 58450
         record = dbcursor.fetchone()
         print('\t record one: ', record)
-        for r in record:
-            if record[r] == 58450: return 3
+        if record == 58450: return 3
     elif _task == 6:
         # Ako sme na tom na Slovensku? Vymierame alebo rastieme?
         # Zobrazte trend vývoja populácie za jednotlivé roky a výsledok zobrazte od najnovších informácií po najstaršie.
