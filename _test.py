@@ -201,10 +201,9 @@ def checktask(_task, dbcursor):
         if foundyears == 4:
             for line in record:
                 for col in line:
-                    for v in task6results.values():
-                        if col == v:
-                            foundvalues += 1
-                            break
+                    if col in list(task6results.values()):
+                        foundvalues += 1
+                        break
         print(f'found names: {foundyears}, values: {foundvalues}')
         points = 3
         if not issorted: points -= 0.5
