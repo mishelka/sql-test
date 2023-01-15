@@ -217,18 +217,18 @@ def checktask(_task, dbcursor):
         record = dbcursor.fetchall()
 
         print(f'\t record all length: {len(record)}')
+        found = 0
         if len(record) == 10:
             for r in record:
+                print(f'\t\t{r}')
+                sys.stdout.write('\t\t\t')
                 name = None
                 for c in r:
                     if c in task9results.keys():
                         name = c
+                        sys.stdout.write(f'name found: {name}, ')
                         break
-                if name is not None:
-                    for c in r:
-                        if c == task9results[name]:
-                            task9results.pop(name)
-                            break
+                print()
         print(len(task9results))
         if len(task9results) == 0: return 3
     elif _task == 10:
