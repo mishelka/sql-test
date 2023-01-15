@@ -100,7 +100,7 @@ def checktask(_task, dbcursor):
         print(f'\t record all length: {len(record)}')
         por, luc = False, False
         for r in record:
-            for c in record:
+            for c in r:
                 if c == 'Porubka': por = True
                 if c == 'Lucka': luc = True
         if len(record) == 2: print(f'\t records: {record}')
