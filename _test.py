@@ -166,8 +166,22 @@ def checktask(_task, dbcursor):
         record = dbcursor.fetchall()
         task6results = {2012: 5410836, 2011: 5404322, 2010: 5435273, 2009: 5424925}
         print(f'\t record all: {record}')
-        print('\t>>>>>>task 6 does not have a test yet')
-        return -1
+        found = 0
+        if len(record) != 4: return 0
+
+        for r in record:
+            print(r)
+            for c in r:
+                if c in task6results.keys():
+                    found += 1
+                    print('year found')
+                    break
+            if found == 4:
+                for c in r:
+                    if c in task6results.values():
+                        print('value found')
+                        found -= 1
+        if found == 0: return 3
     elif _task == 7:
         # Zistite, ktorá obec bola najmenšia v okrese Tvrdošín v roku 2011.
         # Pri tvorbe dopytu vám môže pomôcť informácia,
@@ -217,20 +231,21 @@ def checktask(_task, dbcursor):
         }
         record = dbcursor.fetchall()
 
+        if len(record) != 10: return 0
+
         found = 0
-        if len(record) == 10:
-            for r in record:
-                print(r)
+        for r in record:
+            print(r)
+            for c in r:
+                if c in task9results.keys():
+                    found += 1
+                    print('name found')
+                    break
+            if found == 10:
                 for c in r:
-                    if c in task9results.keys():
-                        found += 1
-                        print('name found')
-                        break
-                if found == 10:
-                    for c in r:
-                        if c in task9results.values():
-                            print('value found')
-                            found -= 1
+                    if c in task9results.values():
+                        print('value found')
+                        found -= 1
         if found == 0: return 3
     elif _task == 10:
         # Vypíšte sumárne informácie o stave Slovenska v roku 2012 v podobe tabuľky,
