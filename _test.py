@@ -99,8 +99,8 @@ def checktask(_task, dbcursor):
         record = dbcursor.fetchall()
         print(f'\t record all length: {len(record)}')
         if len(record) != 2: return 0
-        print(f'\t records: {record}')
 
+        print(f'\t records: {record}')
         por, luc = False, False
         for r in record:
             print(r)
@@ -266,6 +266,7 @@ def checktask(_task, dbcursor):
         # ?
         record = dbcursor.fetchall()
         if len(record) != 10: return 0
+        print(record)
 
         print(f'\t record all length: {len(record)}')
         return -1
