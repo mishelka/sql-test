@@ -113,19 +113,21 @@ def checktask(_task, dbcursor):
             return 2
         if len(record) == 1:
             print('\t record one: ', record[0])
-            for r in record:
-                if record[r] == 11: return 3
+            for c in record[0]:
+                print(c)
+                if c == 11: return 3
     elif _task== 3:
         # A koľko má košický kraj obcí? Pri tvorbe dopytu vám môže pomôcť informácia, že Trenčiansky kraj má spolu 276 obcí.
         # Odpoveď: 461
         record = dbcursor.fetchall()
-        if len(record) == 1:
-            print('\t record one: ', record[0])
-            for r in record:
-                if record[r] == 11: return 3
         if len(record) == 461:
             print('\t record length: ', len(record))
             return 1.5
+        if len(record) == 1:
+            print('\t record one: ', record[0])
+            for c in record[0]:
+                print(c)
+                if c == 461: return 3
     elif _task == 4:
         # Zistite, ktorá obec (mesto) bola na Slovensku najväčšia v roku 2012.
         # Pri tvorbe dopytu vám môže pomôcť informácia, že táto obec (mesto) bola najväčšia na Slovensku v rokoch 2009-2012,
@@ -151,9 +153,10 @@ def checktask(_task, dbcursor):
             print('\t record length: ', len(record))
             return 1.5
         if len(record) == 1:
-            print('\t record: ', record)
-            for r in record:
-                if record[r] == 58450:
+            print('\t record: ', record[0])
+            for c in record[0]:
+                print(c)
+                if c == 58450:
                     return 3
     elif _task == 6:
         # Ako sme na tom na Slovensku? Vymierame alebo rastieme?
