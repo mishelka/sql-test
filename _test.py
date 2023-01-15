@@ -126,7 +126,7 @@ def checktask(_task, dbcursor):
         ba = False
         num = False
         for c in record:
-            if c == 'Bratislava - Petržalka':
+            if c == 'Bratislava - Petrzalka':
                 ba = True
             if c == 105468:
                 num = True
@@ -185,7 +185,8 @@ def checktask(_task, dbcursor):
         print('\t record all length: ', len(record))
         if len(record) == 10: return 3
     elif _task == 10:
-        # Vypíšte sumárne informácie o stave Slovenska v roku 2012 v podobe tabuľky, ktorá bude obsahovať
+        # Vypíšte sumárne informácie o stave Slovenska v roku 2012 v podobe tabuľky,
+        # ktorá bude obsahovať
         # pre každý kraj informácie o počte obyvateľov, o počte obcí a počte okresov.
         # ?
         record = dbcursor.fetchall()
