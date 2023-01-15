@@ -266,7 +266,7 @@ print('Missing tasks')
 for result in results:
     sys.stdout.write('\t' + result)
     keys = results[result].keys()
-    for i in [1.1, 1.2, 3, 4, ..., 12]:
+    for i in [1.1, 1.2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]:
         if not i in keys: sys.stdout.write(str(i) + ', ')
     print()
 
