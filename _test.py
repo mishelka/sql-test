@@ -179,6 +179,7 @@ def checktask(_task, dbcursor):
         cimhova = False
         num = False
         if len(record) == 2:
+            print('\t record: ', record)
             for r in record:
                 for c in r:
                     if c == 'Štefanov nad Oravou':
@@ -188,7 +189,7 @@ def checktask(_task, dbcursor):
                     if c == 659:
                         num = True
             if cimhova & stefanov & num: return 3
-            if stefanov or cimhova or num: return 1.5
+            if (stefanov or cimhova) & num: return 1.5
         return 0
     elif _task == 8:
         # Zistite všetky obce, ktoré mali v roku 2010 počet obyvateľov do 5000.
@@ -264,7 +265,7 @@ print('\tConnected to db obce')
 
 print('Missing tasks')
 for result in results:
-    sys.stdout.write('\t' + result)
+    sys.stdout.write('\t' + result + ': ')
     keys = results[result].keys()
     for i in [1.1, 1.2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]:
         if not (i in keys):
@@ -283,7 +284,7 @@ for result in results:
             cur.execute(results[result][task])
             res = checktask(task, cur)
             if res == 0:
-                print('\t<<<<< FAIL')
+                print('\t<<<<<', task, 'FAIL')
             else:
                 print('\t<<<<<', task, 'SUCCESS (', str(res) + 'b', ')')
         except Exception as error:
