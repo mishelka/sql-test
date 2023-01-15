@@ -117,7 +117,7 @@ def checktask(_task, dbcursor):
             for c in record[0]:
                 print(c)
                 if c == 11: return 3
-    elif _task== 3:
+    elif _task == 3:
         # A koľko má košický kraj obcí? Pri tvorbe dopytu vám môže pomôcť informácia, že Trenčiansky kraj má spolu 276 obcí.
         # Odpoveď: 461
         record = dbcursor.fetchall()
@@ -267,7 +267,8 @@ for result in results:
     sys.stdout.write('\t' + result)
     keys = results[result].keys()
     for i in [1.1, 1.2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]:
-        if not i in keys: sys.stdout.write(str(i) + ', ')
+        if not (i in keys):
+            sys.stdout.write(str(i) + ', ')
     print()
 
 print('Running tests')
