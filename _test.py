@@ -263,7 +263,7 @@ for result in results:
             conn = dbconn()
             cur = conn.cursor()
         try:
-            print('>>>> Task ', task)
+            print('>>>>', result, 'Task', task)
             cur.execute(results[result][task])
             res = checktask(task, cur)
             if res == 0:
