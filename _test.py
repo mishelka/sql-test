@@ -163,7 +163,8 @@ def checktask(_task, dbcursor):
         # Ako sme na tom na Slovensku? Vymierame alebo rastieme?
         # Zobrazte trend vývoja populácie za jednotlivé roky a výsledok zobrazte od najnovších informácií po najstaršie.
         # ?
-        # record = dbcursor.fetchall()
+        record = dbcursor.fetchall()
+        task6results = {2012: 5410836, 2011: 5404322, 2010: 5435273, 2009: 5424925}
         print(f'\t record all: {record}')
         print('\t>>>>>>task 6 does not have a test yet')
         return -1
