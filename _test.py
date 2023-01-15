@@ -4,6 +4,8 @@ import subprocess
 import psycopg2
 import sys
 
+from _decimal import Decimal
+
 path = os.path.join('.', 'files')
 os.chdir(path)
 
@@ -247,7 +249,7 @@ def checktask(_task, dbcursor):
                     break
             if namesfound == 10:
                 for c in r:
-                    if float(c) in task9results.values():
+                    if isinstance(c, Decimal) and float(c) in task9results.values():
                         print('value found')
                         valuesfound += 1
                         break
