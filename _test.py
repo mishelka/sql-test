@@ -15,7 +15,7 @@ def cleandb():
 
 
 def readsqlscript(_filepath, _file):
-    print('reading: {}'.format(_filepath))
+    print('\treading: {}'.format(_filepath))
 
     with open(_file, 'r', encoding='utf8') as f:
         filelines = (line.strip() for line in f)  # All lines including the blank ones
@@ -92,7 +92,7 @@ def checktask(_task, dbcursor):
         # 1b ktorý názov obce je použitý najviac.
         # Odpoveď: Porubka, Lucka (4)
         record = dbcursor.fetchall()
-        print('\t record all: ', record)
+        print('\t record all length: ', len(record))
         por, luc = False, False
         for c in record:
             if c == 'Porubka': por = True
@@ -242,7 +242,7 @@ for file in os.listdir():
 print('Connecting to database')
 conn = dbconn()
 cur = conn.cursor()
-print('Connected to db obce')
+print('\tConnected to db obce')
 
 print('Running tests')
 for result in results:
