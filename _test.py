@@ -167,29 +167,25 @@ def checktask(_task, dbcursor):
         # ?
         record = dbcursor.fetchall()
         task6results = {2012: 5410836, 2011: 5404322, 2010: 5435273, 2009: 5424925}
-        print(f'\t record all: {record}')
-        foundNames, foundValues = 0, 0
-        print(f'VALUES: {task6results.values()}')
+        foundnames, foundvalues = 0, 0
         if len(record) != 4: return 0
 
         for r in record:
-            print(r)
             for c in r:
                 if c in task6results.keys():
-                    foundNames += 1
+                    foundnames += 1
                     break
-        if foundNames == 4:
+        if foundnames == 4:
             for r in record:
                 for c in r:
-                    print(f'searching value: {c}')
                     for v in task6results.values():
-                        sys.stdout.write(f'\t{v}; ')
                         if c == v:
-                            sys.stdout.write('[VALUE FOUND]')
-                            foundValues += 1
-                    print()
-        if foundNames >= 4 and foundValues >= 4: return 3
-        if foundNames >= 4: return 1
+                            foundvalues += 1
+                            break
+        print(f'found names: {foundnames}, values: {foundvalues}')
+        if foundnames == 4 and foundvalues == 4: return 3
+        if foundnames == 4: return 1
+        if foundvalues == 4: return 2
     elif _task == 7:
         # Zistite, ktorá obec bola najmenšia v okrese Tvrdošín v roku 2011.
         # Pri tvorbe dopytu vám môže pomôcť informácia,
@@ -243,19 +239,19 @@ def checktask(_task, dbcursor):
 
         namesfound, valuesfound = 0, 0
         for r in record:
-            print(r)
             for c in r:
                 if c in task9results.keys():
                     namesfound += 1
                     break
-        if namesfound == 10:
-            for r in record:
-                for c in r:
-                    if isinstance(c, Decimal) and float(c) in task9results.values():
-                        print('value found')
-                        valuesfound += 1
-        if namesfound >= 10 and valuesfound >= 10: return 3
-        if namesfound >= 10: return 1
+        for r in record:
+            for c in r:
+                if isinstance(c, Decimal) and float(c) in task9results.values():
+                    valuesfound += 1
+                    break
+        print(f'found names: {namesfound}, values: {valuesfound}')
+        if namesfound == 10 and valuesfound == 10: return 3
+        if namesfound == 10: return 1
+        if valuesfound == 10: return 2
     elif _task == 10:
         # Vypíšte sumárne informácie o stave Slovenska v roku 2012 v podobe tabuľky,
         # ktorá bude obsahovať
@@ -282,14 +278,15 @@ def checktask(_task, dbcursor):
         # Zistite počet obcí, ktorých počet obyvateľov v roku 2012 je nižší,
         # ako bol slovenský priemer v danom roku.
         # Odpoveď: obcí je 2433
+        # todo: oprav este na fetchall
         record = dbcursor.fetchone()
         print(f'\t record one: {record}')
         if record[0] == 2433: return 3
         if record[0] == 2435: return 1.5
         record = dbcursor.fetchall()
         print(f'\t record all length: {len(record)}')
-        if len(record) == 2433: return 2
-        if len(record) == 2435: return 1
+        if len(record) == 2432: return 2
+        if len(record) == 2434: return 1
     else:
         print('!!!UNKNOWN TASK')
     return 0
