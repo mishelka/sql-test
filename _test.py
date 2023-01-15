@@ -143,9 +143,15 @@ def checktask(_task, dbcursor):
     elif _task == 5:
         # Koľko obyvateľov mal okres Sabinov v roku 2012? Pri tvorbe dopytu vám môže pomôcť informácia, že okres Dolný Kubín mal v roku 2010 39553 obyvateľov.
         # Odpoveď: 58450
-        record = dbcursor.fetchone()
-        print('\t record one: ', record)
-        if record == 58450: return 3
+        record = dbcursor.fetchall()
+        if len(record) == 58450:
+            print('\t record length: ', len(record))
+            return 1.5
+        if len(record) == 1:
+            print('\t record: ', record)
+            for r in record:
+                if record[r] == 58450:
+                    return 3
     elif _task == 6:
         # Ako sme na tom na Slovensku? Vymierame alebo rastieme?
         # Zobrazte trend vývoja populácie za jednotlivé roky a výsledok zobrazte od najnovších informácií po najstaršie.
