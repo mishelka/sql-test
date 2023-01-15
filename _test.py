@@ -156,7 +156,7 @@ def checktask(_task, dbcursor):
         # Potok s počtom obyvateľov 107.
         # Odpoveď: Štefanov nad Oravou a Čimhová (659)
         record = dbcursor.fetchall()
-        print('\t record all: ', record)
+        print('\t record all length: ', len(record))
         stefanov = False
         cimhova = False
         num = False
@@ -258,7 +258,7 @@ for result in results:
             if res == 0:
                 print('\t<<<<< FAIL')
             else:
-                print('\t<<<<<', task, 'SUCCESS (', res + 'b', ')')
+                print('\t<<<<<', task, 'SUCCESS (', str(res) + 'b', ')')
         except Exception as error:
             print('\t<<<<<', task, 'ERROR EXECUTING', error)
             cur.close()
