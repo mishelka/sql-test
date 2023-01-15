@@ -281,12 +281,19 @@ def checktask(_task, dbcursor):
                     foundnames += 1
                     if col != task10names[index]:
                         issorted = False
+                    break
+            for col in line:
                 if col in task10population:
                     foundpopulation += 1
+                    break
+            for col in line:
                 if col in task10cities:
                     foundcities += 1
+                    break
+            for col in line:
                 if col in task10regions:
                     foundregions += 1
+                    break
             index += 1
         points = 5
         if not issorted: points -= 1
