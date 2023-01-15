@@ -166,22 +166,24 @@ def checktask(_task, dbcursor):
         record = dbcursor.fetchall()
         task6results = {2012: 5410836, 2011: 5404322, 2010: 5435273, 2009: 5424925}
         print(f'\t record all: {record}')
-        found = 0
+        foundNames, foundValues = 0, 0
+        print(f'VALUES: {task6results.values()}')
         if len(record) != 4: return 0
 
         for r in record:
             print(r)
             for c in r:
                 if c in task6results.keys():
-                    found += 1
-                    print('year found')
+                    foundNames += 1
                     break
-            if found == 4:
+            if foundNames == 4:
                 for c in r:
-                    if c in task6results.values():
-                        print('value found')
-                        found -= 1
-        if found == 0: return 3
+                    for v in task6results.values():
+                        if c == v:
+                            print('value found')
+                            foundValues += 1
+        if foundNames == 4 and foundValues == 4: return 3
+        if foundNames == 4: return 1
     elif _task == 7:
         # Zistite, ktorá obec bola najmenšia v okrese Tvrdošín v roku 2011.
         # Pri tvorbe dopytu vám môže pomôcť informácia,
