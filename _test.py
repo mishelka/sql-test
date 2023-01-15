@@ -146,6 +146,7 @@ def checktask(_task, dbcursor):
         # record = dbcursor.fetchall()
         print('\t record all: ', record)
         print('\t>>>>>>task 6 does not have a test yet')
+        return -1
     elif _task == 7:
         # Zistite, ktorá obec bola najmenšia v okrese Tvrdošín v roku 2011.
         # Pri tvorbe dopytu vám môže pomôcť informácia,
@@ -190,9 +191,7 @@ def checktask(_task, dbcursor):
         # ?
         record = dbcursor.fetchall()
         print('\t record all length: ', len(record))
-        return 0
-        # print('\t record all (test visually I guess): ', record)
-        # print(record)
+        return -1
     elif _task == 11:
         # To, že či vymierame alebo rastieme, sme už zisťovali.
         # Ale ktoré obce sú na tom naozaj zle?
