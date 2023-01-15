@@ -179,11 +179,13 @@ def checktask(_task, dbcursor):
             if foundNames == 4:
                 for c in r:
                     for v in task6results.values():
+                        print(c, v)
                         if c == v:
-                            print('value found')
+                            print('VALUE FOUND')
                             foundValues += 1
-        if foundNames == 4 and foundValues == 4: return 3
-        if foundNames == 4: return 1
+                            break
+        if foundNames >= 4 and foundValues >= 4: return 3
+        if foundNames >= 4: return 1
     elif _task == 7:
         # Zistite, ktorá obec bola najmenšia v okrese Tvrdošín v roku 2011.
         # Pri tvorbe dopytu vám môže pomôcť informácia,
@@ -248,8 +250,9 @@ def checktask(_task, dbcursor):
                     if float(c) in task9results.values():
                         print('value found')
                         valuesfound += 1
-        if namesfound == 10 and valuesfound == 10: return 3
-        if namesfound == 10: return 1
+                        break
+        if namesfound >= 10 and valuesfound >= 10: return 3
+        if namesfound >= 10: return 1
     elif _task == 10:
         # Vypíšte sumárne informácie o stave Slovenska v roku 2012 v podobe tabuľky,
         # ktorá bude obsahovať
