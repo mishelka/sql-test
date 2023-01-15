@@ -78,8 +78,6 @@ def dbconn():
 
 
 def checktask(_task, dbcursor):
-    dbcursor.close()
-    dbcursor = conn.cursor()
     record = ''
     if _task == 1.1:
         # 1a kolko je takych obci
