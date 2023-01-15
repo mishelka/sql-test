@@ -235,21 +235,21 @@ def checktask(_task, dbcursor):
 
         if len(record) != 10: return 0
 
-        found = 0
+        namesfound, valuesfound = 0, 0
         for r in record:
             print(r)
             for c in r:
                 if c in task9results.keys():
-                    found += 1
+                    namesfound += 1
                     print('name found')
                     break
-            if found == 10:
+            if namesfound == 10:
                 for c in r:
                     if float(c) in task9results.values():
                         print('value found')
-                        found -= 1
-        if found == 10: return 1 #only names were found
-        if found == 0: return 3
+                        valuesfound += 1
+        if namesfound == 10 and valuesfound == 10: return 3
+        if namesfound == 10: return 1
     elif _task == 10:
         # Vypíšte sumárne informácie o stave Slovenska v roku 2012 v podobe tabuľky,
         # ktorá bude obsahovať
