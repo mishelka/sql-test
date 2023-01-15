@@ -265,5 +265,5 @@ for result in results:
             conn.close()
             conn = None
 
-cur.close()
-conn.close()
+if cur: cur.close()
+if conn: conn.close()
