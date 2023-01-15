@@ -2,6 +2,7 @@ import os
 import re
 import subprocess
 import psycopg2
+import sys
 
 path = os.path.join('.', 'files')
 os.chdir(path)
@@ -260,6 +261,14 @@ print('Connecting to database')
 conn = dbconn()
 cur = conn.cursor()
 print('\tConnected to db obce')
+
+print('Missing tasks')
+for result in results:
+    sys.stdout.write('\t' + result)
+    keys = results[result].keys()
+    for i in [1.1, 1.2, 3, 4, ..., 12]:
+        if not i in keys: sys.stdout.write(str(i) + ', ')
+    print()
 
 print('Running tests')
 for result in results:
