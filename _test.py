@@ -9,6 +9,24 @@ from _decimal import Decimal
 path = os.path.join('.', 'files')
 os.chdir(path)
 
+task6results = {2012: 5410836, 2011: 5404322, 2010: 5435273, 2009: 5424925}
+task9results = {
+            'Bratislava - Ruzinov': 1.2103,
+            'Bratislava - Nove Mesto': 1.1989,
+            'Kosice - Juh': 1.163,
+            'Bratislava - Dubravka': 1.1628,
+            'Bratislava - Karlova Ves': 1.152,
+            'Kosice - Stare Mesto': 1.1437,
+            'Lucenec': 1.1432,
+            'Kosice - Sever': 1.1343,
+            'Bratislava - Podunajske Biskupice': 1.1301,
+            'Piestany': 1.1269
+        }
+task10names = ['Banskobystricky kraj','Bratislavsky kraj','Kosicky kraj','Nitriansky kraj','Presovsky kraj','Trenciansky kraj','Trnavsky kraj','Zilinsky kraj']
+task10population = [658490,612682,794025,688400,817382,593159,556577,690121]
+task10cities = [516,89,461,354,665,276,251,315]
+task10regions = [13,8,11,7,13,9,7,11]
+
 
 def cleandb():
     # FNULL = open(os.devnull, 'w')  # use this if you want to suppress output to stdout from the subprocess
@@ -91,8 +109,8 @@ def checktask(_task, dbcursor):
             return 2
         if len(record) == 1:
             print(f'\t result one: {record}')
-            for c in record[0]:
-                if c == 100: return 3
+            for col in record[0]:
+                if col == 100: return 3
     elif _task == 1.2:
         # 1b ktorý názov obce je použitý najviac.
         # Odpoveď: Porubka, Lucka (4)
@@ -102,11 +120,11 @@ def checktask(_task, dbcursor):
 
         print(f'\t records: {record}')
         por, luc = False, False
-        for r in record:
-            print(r)
-            for c in r:
-                if c == 'Porubka': por = True
-                if c == 'Lucka': luc = True
+        for line in record:
+            print(line)
+            for col in line:
+                if col == 'Porubka': por = True
+                if col == 'Lucka': luc = True
         if por and luc: return 3
         if (por and not luc) or (not por and luc): return 2
     elif _task == 2:
@@ -118,9 +136,9 @@ def checktask(_task, dbcursor):
             return 2
         if len(record) == 1:
             print(f'\t record one: {record[0]}')
-            for c in record[0]:
-                print(c)
-                if c == 11: return 3
+            for col in record[0]:
+                print(col)
+                if col == 11: return 3
     elif _task == 3:
         # A koľko má košický kraj obcí? Pri tvorbe dopytu vám môže pomôcť informácia, že Trenčiansky kraj má spolu 276 obcí.
         # Odpoveď: 461
@@ -130,9 +148,9 @@ def checktask(_task, dbcursor):
             return 1.5
         if len(record) == 1:
             print(f'\t record one: {record[0]}')
-            for c in record[0]:
-                print(c)
-                if c == 461: return 3
+            for col in record[0]:
+                print(col)
+                if col == 461: return 3
     elif _task == 4:
         # Zistite, ktorá obec (mesto) bola na Slovensku najväčšia v roku 2012.
         # Pri tvorbe dopytu vám môže pomôcť informácia, že táto obec (mesto) bola najväčšia na Slovensku v rokoch 2009-2012,
@@ -142,10 +160,10 @@ def checktask(_task, dbcursor):
         print(f'\t record one: {record}')
         ba = False
         num = False
-        for c in record:
-            if c == 'Bratislava - Petrzalka':
+        for col in record:
+            if col == 'Bratislava - Petrzalka':
                 ba = True
-            if c == 105468:
+            if col == 105468:
                 num = True
         if ba & num: return 3
         if ba: return 1.5
@@ -159,32 +177,31 @@ def checktask(_task, dbcursor):
             return 1.5
         if len(record) == 1:
             print(f'\t record: {record[0]}')
-            for c in record[0]:
-                print(c)
-                if c == 58450:
+            for col in record[0]:
+                print(col)
+                if col == 58450:
                     return 3
     elif _task == 6:
         # Ako sme na tom na Slovensku? Vymierame alebo rastieme?
         # Zobrazte trend vývoja populácie za jednotlivé roky a výsledok zobrazte od najnovších informácií po najstaršie.
         # ?
         record = dbcursor.fetchall()
-        task6results = {2012: 5410836, 2011: 5404322, 2010: 5435273, 2009: 5424925}
         foundyears, foundvalues, lineindex, issorted = 0, 0, 0, True
         if len(record) != 4: return 0
 
-        for r in record:
-            for c in r:
-                if c in task6results.keys():
+        for line in record:
+            for col in line:
+                if col in task6results.keys():
                     foundyears += 1
-                    if list(task6results.keys())[lineindex] != c:
+                    if list(task6results.keys())[lineindex] != col:
                         issorted = False
                     break
             lineindex += 1
         if foundyears == 4:
-            for r in record:
-                for c in r:
+            for line in record:
+                for col in line:
                     for v in task6results.values():
-                        if c == v:
+                        if col == v:
                             foundvalues += 1
                             break
         print(f'found names: {foundyears}, values: {foundvalues}')
@@ -206,13 +223,13 @@ def checktask(_task, dbcursor):
         num = False
         if len(record) == 2:
             print(f'\t record: {record}')
-            for r in record:
-                for c in r:
-                    if c == 'Štefanov nad Oravou':
+            for line in record:
+                for col in line:
+                    if col == 'Štefanov nad Oravou':
                         stefanov = True
-                    if c == 'Čimhová':
+                    if col == 'Čimhová':
                         cimhova = True
-                    if c == 659:
+                    if col == 659:
                         num = True
             if cimhova & stefanov & num: return 3
             if (stefanov or cimhova) & num: return 1.5
@@ -228,31 +245,19 @@ def checktask(_task, dbcursor):
     elif _task == 9:
         # Zistite 10 obcí s populáciou nad 20000, ktoré mali v roku 2012 najväčší pomer žien voči mužom (viac žien v obci ako mužov). Týchto 10 obcí vypíšte v poradí od najväčšieho pomeru po najmenší. Vo výsledku okrem názvu obce vypíšte aj pomer zaokrúhlený na 4 desatinné miesta. Pri tvorbe dopytu vám môže pomôcť informácia,
         # že v roku 2011 bol tento pomer pre obec Košice  - Juh 1,1673.
-        task9results = {
-            'Bratislava - Ruzinov': 1.2103,
-            'Bratislava - Nove Mesto': 1.1989,
-            'Kosice - Juh': 1.163,
-            'Bratislava - Dubravka': 1.1628,
-            'Bratislava - Karlova Ves': 1.152,
-            'Kosice - Stare Mesto': 1.1437,
-            'Lucenec': 1.1432,
-            'Kosice - Sever': 1.1343,
-            'Bratislava - Podunajske Biskupice': 1.1301,
-            'Piestany': 1.1269
-        }
         record = dbcursor.fetchall()
 
         if len(record) != 10: return 0
 
         namesfound, valuesfound = 0, 0
-        for r in record:
-            for c in r:
-                if c in task9results.keys():
+        for line in record:
+            for col in line:
+                if col in task9results.keys():
                     namesfound += 1
                     break
-        for r in record:
-            for c in r:
-                if isinstance(c, Decimal) and float(c) in task9results.values():
+        for line in record:
+            for col in line:
+                if isinstance(col, Decimal) and float(col) in task9results.values():
                     valuesfound += 1
                     break
         print(f'found names: {namesfound}, values: {valuesfound}')
@@ -263,11 +268,33 @@ def checktask(_task, dbcursor):
         # Vypíšte sumárne informácie o stave Slovenska v roku 2012 v podobe tabuľky,
         # ktorá bude obsahovať
         # pre každý kraj informácie o počte obyvateľov, o počte obcí a počte okresov.
-        # ?
+
         record = dbcursor.fetchall()
         if len(record) != 8: return 0
-        print(record)
-        return -1
+
+        foundnames, foundpopulation, foundcities, foundregions, issorted = 0, 0, 0, 0, True
+        index = 0
+
+        for line in record:
+            for col in line:
+                if col in task10names:
+                    foundnames += 1
+                    if col != task10names[index]:
+                        issorted = False
+                if col in task10population:
+                    foundpopulation += 1
+                if col in task10cities:
+                    foundcities += 1
+                if col in task10regions:
+                    foundregions += 1
+            index += 1
+        points = 5
+        if not issorted: points -= 1
+        if foundnames != 8: points -= 1
+        if foundpopulation != 8: points -= 1
+        if foundcities != 8: points -= 1
+        if foundregions != 8: points -= 1
+        return points
     elif _task == 11:
         # To, že či vymierame alebo rastieme, sme už zisťovali.
         # Ale ktoré obce sú na tom naozaj zle?
