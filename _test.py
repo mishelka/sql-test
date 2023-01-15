@@ -82,10 +82,8 @@ def checktask(_task, dbcursor):
     if _task == 1.1:
         # 1a kolko je takych obci
         # vysledok je 100
-        record = dbcursor.fetchone()
-        print('\t record one: ', record)
-        if record[0] == 100: return 3
         record = dbcursor.fetchall()
+        print('\t', record, record)
         print('\t record all length: ', len(record))
         if len(record) == 100: return 2
     elif _task == 1.2:
