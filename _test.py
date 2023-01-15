@@ -100,6 +100,7 @@ def checktask(_task, dbcursor):
         print(f'\t record all length: {len(record)}')
         por, luc = False, False
         for r in record:
+            print(r)
             for c in r:
                 if c == 'Porubka': por = True
                 if c == 'Lucka': luc = True
@@ -263,6 +264,8 @@ def checktask(_task, dbcursor):
         # pre každý kraj informácie o počte obyvateľov, o počte obcí a počte okresov.
         # ?
         record = dbcursor.fetchall()
+        if len(record) != 10: return 0
+
         print(f'\t record all length: {len(record)}')
         return -1
     elif _task == 11:
