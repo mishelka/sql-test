@@ -116,12 +116,9 @@ def checktask(_task, dbcursor):
         # Odpoveď: Porubka, Lucka (4)
         record = dbcursor.fetchall()
         print(f'\t record all length: {len(record)}')
-        print(record)
 
-        print(f'\t records: {record}')
         por, luc = False, False
         for line in record:
-            print(line)
             for col in line:
                 if col == 'Porubka': por = True
                 if col == 'Lucka': luc = True
