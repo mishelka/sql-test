@@ -222,19 +222,21 @@ def checktask(_task, dbcursor):
         stefanov = False
         cimhova = False
         num = False
-        if len(record) == 2:
-            print(f'\t record: {record}')
-            for line in record:
-                for col in line:
-                    if col == 'Štefanov nad Oravou':
-                        stefanov = True
-                    if col == 'Čimhová':
-                        cimhova = True
-                    if col == 659:
-                        num = True
-            if cimhova & stefanov & num: return 3
-            if (stefanov or cimhova) & num: return 1.5
-        return 0
+
+        print(f'\t record: {record}')
+        for line in record:
+            for col in line:
+                if col == 'Štefanov nad Oravou':
+                    stefanov = True
+                if col == 'Čimhová':
+                    cimhova = True
+                if col == Decimal(659) or col == 659:
+                    num = True
+                    print('>>>>> 659:', num)
+
+        if cimhova & stefanov & len(record) == 2: return 3
+        if (stefanov or cimhova) & len(record) == 2: return 1.5
+        if len(record) == 15: return 1
     elif _task == 8:
         # Zistite všetky obce, ktoré mali v roku 2010 počet obyvateľov do 5000.
         # Pri tvorbe dopytu vám môže pomôcť informácia, že v roku 2009 bolo týchto obcí o
@@ -374,10 +376,13 @@ for result in results:
             cur = conn.cursor()
         try:
             print(f'>>>> Task {task} by author {result}')
-            cur.execute(results[result][task])
+            query = results[result][task]
+            cur.execute(query)
             res = checktask(task, cur)
-            if task == 1.2 and res == 3 and 'MAX' in results[result][task].upper():
+            if task == 1.2 and res == 3 and 'MAX' in query.upper():
                 res = 4
+            if task == 7 and (res > 1.5) and ('LIMIT' in query.upper() or '659' in query):
+                res = 1.5
             if res == 0:
                 print(f'\tTASK {task} RESULT: FAIL')
             else:
