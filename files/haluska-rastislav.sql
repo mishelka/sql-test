@@ -10,7 +10,7 @@ from (
 	) as ok;
 
 
---1b
+-- 1b
 select nazov, count(*)
 from obec
 group by nazov

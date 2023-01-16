@@ -116,7 +116,7 @@ def checktask(_task, dbcursor):
         # Odpoveď: Porubka, Lucka (4)
         record = dbcursor.fetchall()
         print(f'\t record all length: {len(record)}')
-        if len(record) != 2: return 0
+        print(record)
 
         print(f'\t records: {record}')
         por, luc = False, False
@@ -125,6 +125,7 @@ def checktask(_task, dbcursor):
             for col in line:
                 if col == 'Porubka': por = True
                 if col == 'Lucka': luc = True
+        if len(record) > 2 and por and luc: return 1
         if por and luc: return 3
         if (por and not luc) or (not por and luc): return 2
     elif _task == 2:
