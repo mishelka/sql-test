@@ -163,7 +163,7 @@ def checktask(_task, dbcursor):
                 ba = True
             if col == 105468:
                 num = True
-        if ba & num: return 3
+        if ba and num: return 3
         if ba: return 1.5
         if num: return 1.5
     elif _task == 5:
@@ -234,8 +234,8 @@ def checktask(_task, dbcursor):
                     num = True
                     print('>>>>> 659:', num)
 
-        if cimhova & stefanov & len(record) == 2: return 3
-        if (stefanov or cimhova) & len(record) == 2: return 1.5
+        if cimhova and stefanov and len(record) == 2: return 3
+        if (stefanov or cimhova) and len(record) == 2: return 1.5
         if len(record) == 15: return 1
     elif _task == 8:
         # Zistite všetky obce, ktoré mali v roku 2010 počet obyvateľov do 5000.
