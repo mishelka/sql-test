@@ -379,6 +379,8 @@ for result in results:
             print(f'>>>> Task {task} by author {result}')
             cur.execute(results[result][task])
             res = checktask(task, cur)
+            if task == 1.2 and res == 3 and 'MAX' in results[result][task].upper():
+                res = 4
             if res == 0:
                 print(f'\tTASK {task} RESULT: FAIL')
             else:
