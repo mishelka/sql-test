@@ -226,9 +226,9 @@ def checktask(_task, dbcursor):
         print(f'\t record: {record}')
         for line in record:
             for col in line:
-                if col == 'Štefanov nad Oravou':
+                if col == 'Stefanov nad Oravou':
                     stefanov = True
-                if col == 'Čimhová':
+                if col == 'Cimhova':
                     cimhova = True
                 if col == Decimal(659) or col == 659:
                     num = True
@@ -236,7 +236,7 @@ def checktask(_task, dbcursor):
 
         if cimhova and stefanov and len(record) == 2: return 3
         if (stefanov or cimhova) and len(record) == 2: return 1.5
-        if len(record) == 15: return 1
+        if len(record) > 2: return 1
     elif _task == 8:
         # Zistite všetky obce, ktoré mali v roku 2010 počet obyvateľov do 5000.
         # Pri tvorbe dopytu vám môže pomôcť informácia, že v roku 2009 bolo týchto obcí o
