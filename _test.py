@@ -6,6 +6,19 @@ import sys
 
 from _decimal import Decimal
 
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
 path = os.path.join('.', 'files')
 os.chdir(path)
 
@@ -363,12 +376,13 @@ for result in results:
 print('Running tests')
 for result in results:
     print(f'######### {result} #########')
+    total = 0
     for task in results[result]:
         if conn is None:
             conn = dbconn()
             cur = conn.cursor()
         try:
-            print(f'>>>> Task {task} by author {result}')
+            print(f'{bcolors.HEADER}>>>> Task {task} by author {result}{bcolors.ENDC}')
             query = results[result][task]
             cur.execute(query)
             res = checktask(task, cur)
@@ -376,14 +390,16 @@ for result in results:
                     and ('LIMIT' in query.upper())):
                 res = 2
             if res == 0:
-                print(f'\tTASK {task} RESULT: FAIL')
+                print(f'\tTASK {task} RESULT: {bcolors.FAIL}FAIL{bcolors.ENDC}')
             else:
-                print(f'\tTASK {task} RESULT: {str(res)}b')
+                print(f'\tTASK {task} RESULT: {bcolors.OKGREEN}{str(res)}b{bcolors.ENDC}')
+            total += res
         except Exception as error:
-            print(f'\tTASK {task} RESULT: ERROR EXECUTING: {error}')
+            print(f'{bcolors.FAIL}\tTASK {task} RESULT: ERROR EXECUTING: {error}{bcolors.ENDC}')
             cur.close()
             conn.close()
             conn = None
+        print(f'{bcolors.OKGREEN}TOTAL POINTS: {bcolors.BOLD}{total}{bcolors.ENDC}')
 
 if cur: cur.close()
 if conn: conn.close()
