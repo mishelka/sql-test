@@ -375,14 +375,14 @@ for result in results:
 
 print('Running tests')
 for result in results:
-    print(f'######### {result} #########')
+    print(f'{bcolors.HEADER}{bcolors.BOLD}######### {result} #########{bcolors.END}')
     total = 0
     for task in results[result]:
         if conn is None:
             conn = dbconn()
             cur = conn.cursor()
         try:
-            print(f'{bcolors.HEADER}>>>> Task {task} by author {result}{bcolors.ENDC}')
+            print(f'{bcolors.BOLD}>>>> Task {task} by author {result}{bcolors.ENDC}')
             query = results[result][task]
             cur.execute(query)
             res = checktask(task, cur)
