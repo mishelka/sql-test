@@ -73,7 +73,6 @@ def readsqlscript(_filepath, _file):
             if isinstance(l, int):
                 if linenum != -1:
                     t = currenttask.strip()
-                    print(f'{linenum}: \"{t}\"')
                     if t and len(t) > 0:
                         _tasks[linenum] = t
                 linenum = l
