@@ -8,7 +8,7 @@ GROUP BY o.nazov
 HAVING COUNT(*) > 1
 ORDER BY COUNT DESC;
 
--- 1b - odpoved na otazku je Porubka a Lucka, obe 4x.
+-- 1 - odpoved na otazku je Porubka a Lucka, obe 4x.
 
 -- 2. Kolko okresov sa nachadza v kosickom kraji?
 
