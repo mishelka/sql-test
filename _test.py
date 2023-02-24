@@ -346,7 +346,7 @@ def checktask(_task, dbcursor):
 # print('Cleaning database...')
 # cleandb()
 
-print('Parsing results...')
+print(f'{bcolors.WARNING}Parsing results...{bcolors.ENDC}')
 results = {}
 
 for file in sorted(os.listdir()):
@@ -359,12 +359,12 @@ for file in sorted(os.listdir()):
 
 # print(results)
 
-print('Connecting to database')
+print(f'{bcolors.WARNING}Connecting to database{bcolors.ENDC}')
 conn = dbconn()
 cur = conn.cursor()
 print('\tConnected to db obce')
 
-print(f'{bcolors.WARNING}Missing tasks{bcolors.ENDC}')
+print(f'{bcolors.FAIL}Missing tasks{bcolors.ENDC}')
 for result in results:
     sys.stdout.write('\t' + result + ': ')
     keys = results[result].keys()
@@ -373,7 +373,7 @@ for result in results:
             sys.stdout.write(str(i) + ', ')
     print()
 
-print('Running tests')
+print(f'\n{bcolors.WARNING}Running tests{bcolors.ENDC}\n')
 for result in results:
     print(f'{bcolors.HEADER}{bcolors.BOLD}######### {result} #########{bcolors.ENDC}')
     total = 0
@@ -382,7 +382,7 @@ for result in results:
             conn = dbconn()
             cur = conn.cursor()
         try:
-            print(f'{bcolors.BOLD}>>>> Task {task} by author {result}{bcolors.ENDC}')
+            print(f'{bcolors.BOLD}Task {task}{bcolors.ENDC}')
             query = results[result][task]
             cur.execute(query)
             res = checktask(task, cur)
@@ -390,16 +390,16 @@ for result in results:
                     and ('LIMIT' in query.upper())):
                 res = 2
             if res == 0:
-                print(f'\tTASK {task} RESULT: {bcolors.FAIL}FAIL{bcolors.ENDC}')
+                print(f'\tRESULT: {bcolors.FAIL}FAIL{bcolors.ENDC}')
             else:
-                print(f'\tTASK {task} RESULT: {bcolors.OKGREEN}{str(res)}b{bcolors.ENDC}')
+                print(f'\tRESULT: {bcolors.OKGREEN}{str(res)}b{bcolors.ENDC}')
             total += res
         except Exception as error:
             print(f'{bcolors.FAIL}\tTASK {task} RESULT: ERROR EXECUTING: {error}{bcolors.ENDC}')
             cur.close()
             conn.close()
             conn = None
-    print(f'{bcolors.OKGREEN}TOTAL POINTS: {bcolors.BOLD}{total}{bcolors.ENDC}')
+    print(f'{bcolors.OKGREEN}TOTAL: {bcolors.BOLD}{total}b{bcolors.ENDC}')
 
 if cur: cur.close()
 if conn: conn.close()
