@@ -375,7 +375,7 @@ for result in results:
 
 print('Running tests')
 for result in results:
-    print(f'{bcolors.HEADER}{bcolors.BOLD}######### {result} #########{bcolors.END}')
+    print(f'{bcolors.HEADER}{bcolors.BOLD}######### {result} #########{bcolors.ENDC}')
     total = 0
     for task in results[result]:
         if conn is None:
