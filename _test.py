@@ -82,6 +82,7 @@ def readsqlscript(_filepath, _file):
         # store the last task
         t = currenttask.strip()
         if t and len(t) > 0:
+            print(f'{linenum}: \"{t}\"')
             _tasks[linenum] = t
 
         f.close()
