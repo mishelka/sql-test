@@ -81,7 +81,8 @@ def readsqlscript(_filepath, _file):
 
         # store the last task
         t = currenttask.strip()
-        if t: _tasks[linenum] = t
+        if t and len(t) > 0:
+            _tasks[linenum] = t
 
         f.close()
         _tasks = dict(sorted(_tasks.items()))
