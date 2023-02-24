@@ -73,7 +73,9 @@ def readsqlscript(_filepath, _file):
             if isinstance(l, int):
                 if linenum != -1:
                     t = currenttask.strip()
-                    _tasks[linenum] = t
+                    print(f'{linenum}: \"{t}\"')
+                    if t and len(t) > 0:
+                        _tasks[linenum] = t
                 linenum = l
                 currenttask = ''
                 continue
@@ -82,7 +84,6 @@ def readsqlscript(_filepath, _file):
         # store the last task
         t = currenttask.strip()
         if t and len(t) > 0:
-            print(f'{linenum}: \"{t}\"')
             _tasks[linenum] = t
 
         f.close()
