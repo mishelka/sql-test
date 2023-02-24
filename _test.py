@@ -399,7 +399,7 @@ for result in results:
             cur.close()
             conn.close()
             conn = None
-        print(f'{bcolors.OKGREEN}TOTAL POINTS: {bcolors.BOLD}{total}{bcolors.ENDC}')
+    print(f'{bcolors.OKGREEN}TOTAL POINTS: {bcolors.BOLD}{total}{bcolors.ENDC}')
 
 if cur: cur.close()
 if conn: conn.close()
