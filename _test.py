@@ -364,7 +364,7 @@ conn = dbconn()
 cur = conn.cursor()
 print('\tConnected to db obce')
 
-print('Missing tasks')
+print(f'{bcolors.WARNING}Missing tasks{bcolors.ENDC}')
 for result in results:
     sys.stdout.write('\t' + result + ': ')
     keys = results[result].keys()
