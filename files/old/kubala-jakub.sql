@@ -1,4 +1,4 @@
---20
+--1
 SELECT COUNT(*)
 FROM (
 	SELECT nazov
@@ -7,7 +7,7 @@ FROM (
 	HAVING COUNT(*) > 1
 ) as ok;
 
---1b)
+--2
 SELECT nazov, COUNT(*)
 FROM obec
 GROUP BY nazov
@@ -16,21 +16,21 @@ LIMIT 2;
 --Porubka
 --Lucka
 
---2 
+--3 
 SELECT COUNT(*)
 FROM kraj k, okres o
 WHERE k.id = o.id_kraj
 	AND k.nazov = 'Kosicky kraj';
---11
+--12
 
---3
+--4
 SELECT COUNT(*)
 FROM obec o, kraj k, okres ok
 WHERE o.id_okres = ok.id
 	AND ok.id_kraj = k.id
 		AND k.nazov = 'Kosicky kraj';
 		
---4
+--5
 SELECT p.rok, o.nazov, p.muzi + p.zeny as celkovy_pocet
 FROM obec o, populacia p
 WHERE p.id_obec = o.id
@@ -38,7 +38,7 @@ WHERE p.id_obec = o.id
 ORDER BY celkovy_pocet DESC
 LIMIT 1;
 
---5
+--6
 SELECT SUM(p.muzi + p.zeny)
 from populacia p, obec o, okres ok
 WHERE p.id_obec = o.id
@@ -46,7 +46,7 @@ AND o.id_okres = ok.id
 AND ok.nazov = 'Sabinov'
 AND p.rok = 2012;
 
---6
+--7
 SELECT p.rok, SUM(muzi + zeny) as celkovo
 FROM populacia p
 WHERE rok 
@@ -54,7 +54,7 @@ BETWEEN 2009 AND 2012
 GROUP BY rok
 ORDER BY rok DESC;
 
---7
+--8
 SELECT o.nazov, p.muzi + p.zeny as pop, p.rok
 FROM okres ok, populacia p, obec o
 WHERE p.id_obec = o.id 
@@ -63,25 +63,25 @@ WHERE p.id_obec = o.id
 ORDER BY pop ASC
 LIMIT 2;
 
---8
+--9
 SELECT o.nazov, muzi + zeny as pop, rok
 FROM obec o, populacia p
 WHERE p.id_obec = o.id
 	AND muzi + zeny < 5000 AND rok = 2010
 ORDER BY pop ASC;
 	
---9
-
-
-
-
 --10
+
+
 
 
 --11
 
 
 --12
+
+
+--13
 CREATE OR REPLACE VIEW priemer5
 AS
 SELECT ROUND(AVG(muzi + zeny)) as pop
