@@ -67,10 +67,10 @@ order by pomer_zen DESC
 LIMIT 5;
 -- 11
 select kraj.nazov,
-       sum(pocet_obci)    as pocet_obci,
-       count(okres.nazov) as pocet_okresu,
-       sum(populacia)     as populacia
-from (select obec.id_okres, count(*) pocet_obci, sum(zeny + muzi) as populacia
+       SUM(pocet_obci)    as pocet_obci,
+       COUNT(okres.nazov) as pocet_okresu,
+       SUM(populacia)     as populacia
+from (select obec.id_okres, COUNT(*) pocet_obci, SUM(zeny + muzi) as populacia
       from kraj
                inner join okres on okres.id_kraj = kraj.id
                inner join obec on okres.id = obec.id_okres
@@ -80,8 +80,36 @@ from (select obec.id_okres, count(*) pocet_obci, sum(zeny + muzi) as populacia
          inner join okres on id_okres = okres.id
          inner join kraj on id_kraj = kraj.id
 group by kraj.nazov;
+-- 12
+select orp.nazov,
+       orp.rok,
+       orp.populacia,
+       (populacia_pristiho_roku - orp.populacia)                   rozdil_pristi_rok,
+       (orp.populacia_prespristiho_roku - populacia_pristiho_roku) rozdil_prespristi_rozdil,
+       (populacia_prespristiho_roku - orp.populacia)               celkovy_prirustek
+from (select obec.nazov,
+             rok,
+             sum(zeny + muzi) as populacia,
+             lead(sum(zeny + muzi), 1) over (
+                 partition by obec.nazov
+                 order by rok
+                 )               populacia_pristiho_roku,
+             lead(sum(zeny + muzi), 2) over (
+                 partition by obec.nazov
+                 order by rok
+                 )               populacia_prespristiho_roku
+      from kraj
+               inner join okres on okres.id_kraj = kraj.id
+               inner join obec on okres.id = obec.id_okres
+               inner join populacia on obec.id = id_obec
+      group by obec.nazov, rok
+      having rok > 2009) orp
+where (populacia_pristiho_roku - orp.populacia) < 0
+  and (populacia_prespristiho_roku - populacia_pristiho_roku) < 0
+order by celkovy_prirustek;
 -- 13
 select obec.nazov as population
 from obec
          inner join populacia on obec.id = id_obec
-where rok = 2012 and muzi + zeny < (select avg(muzi + zeny) from populacia where rok = 2012)
+where rok = 2012
+  and muzi + zeny < (select avg(muzi + zeny) from populacia where rok = 2012)
