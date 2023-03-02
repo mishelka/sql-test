@@ -354,9 +354,15 @@ def checktask(_task, dbcursor):
                     foundpopulation2012 += 1
                     break
             for col in line:
-                if col in task12diff or (col.isdigit() and -int(col)) in task12diff:
+                if col in task12diff:
                     founddiff += 1
                     break
+                else:
+                    try:
+                        if -int(col) in task12diff:
+                            founddiff += 1
+                            break
+                    except ValueError: break # do nothing
             index += 1
         print(f'sorted: {"true" if issorted else "false"}, cities: {foundcities}, 2012: {foundpopulation2012}, 2011: {foundpopulation2011}, diff: {founddiff}')
         points = 5
