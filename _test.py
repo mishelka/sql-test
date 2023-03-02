@@ -354,7 +354,7 @@ def checktask(_task, dbcursor):
                     foundpopulation2012 += 1
                     break
             for col in line:
-                if col in task12diff or -int(col) in task12diff:
+                if col in task12diff or (col.isdigit() and -int(col)) in task12diff:
                     founddiff += 1
                     break
             index += 1
