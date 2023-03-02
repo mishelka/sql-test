@@ -336,7 +336,7 @@ def checktask(_task, dbcursor):
         foundcities, foundpopulation2011, foundpopulation2012, founddiff, issorted = 0, 0, 0, 0, True
         index = 0
 
-        print(">>> " + len(task12population2011) + ", " + len(task12population2012) + ", " + len(task12cities) + ", " + len(task12diff))
+        print(f'>>> {len(task12population2011)},  {len(task12population2012)}, {len(task12cities)}, {len(task12diff)}')
 
         for line in record:
             for col in line:
@@ -358,8 +358,7 @@ def checktask(_task, dbcursor):
                     founddiff += 1
                     break
             index += 1
-        print(issorted + ", cities: " + foundcities + ", 2012:" + foundpopulation2012
-              + ", 2011: " + foundpopulation2011 + + ", diff: " + founddiff)
+        print(f'sorted: {issorted}, cities: {foundcities}, 2012: {foundpopulation2012}, 2011: {foundpopulation2011}, diff: {founddiff}')
         points = 5
         if not issorted: points -= 1
         if foundcities != 1307: points -= 1
