@@ -96,6 +96,7 @@ HAVING SUM(muzi+zeny)>20000
 ORDER BY ROUND(SUM(zeny)/CAST(SUM(muzi) AS DECIMAL(18,4)),4) DESC
 LIMIT 10;
 -- 11
+
 CREATE VIEW stav_SK_2012 AS
 SELECT kraj.nazov, SUM(muzi+zeny) AS pocet_obyvatelov, COUNT(obec.id) AS pocet_obci,
        COUNT(DISTINCT okres.id) AS pocet_okresov
@@ -105,6 +106,9 @@ JOIN obec ON okres.id = obec.id_okres
 JOIN populacia ON obec.id = populacia.id_obec
 WHERE rok = 2012
 GROUP BY kraj.nazov;
+
+select * from stav_SK_2012;
+
 -- 12
 SELECT obec.nazov, SUM(p2012.muzi+p2012.zeny) AS posledny_rok, SUM(p2011.muzi+p2011.zeny) AS predosly_rok,
        SUM(p2012.muzi+p2012.zeny) - SUM(p2011.muzi+p2011.zeny) AS rozdiel

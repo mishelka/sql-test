@@ -115,15 +115,15 @@ def checktask(_task, dbcursor):
     record = ''
     if _task == 1:
         # 1a kolko je takych obci
-        # vysledok je 100
+        # vysledok je 217 (resp. ak si pochopil/a ze jedinecne nazvy, tak 100)
         record = dbcursor.fetchall()
-        if len(record) == 100:
+        if len(record) == 100 or len(record) == 217:
             print(f'\t record all length: {len(record)}')
             return 2
         if len(record) == 1:
             print(f'\t result one: {record}')
             for col in record[0]:
-                if col == 100: return 3
+                if col == 100 or col == 217: return 3
     elif _task == 2:
         # 1b ktorý názov obce je použitý najviac.
         # Odpoveď: Porubka, Lucka (4)
@@ -332,8 +332,11 @@ def checktask(_task, dbcursor):
         record = dbcursor.fetchall()
         print(f'\t record all length: {len(record)}')
         if len(record) != 1307: return 0
+
         foundcities, foundpopulation2011, foundpopulation2012, founddiff, issorted = 0, 0, 0, 0, True
         index = 0
+
+        print(">>> " + len(task12population2011) + ", " + len(task12population2012) + ", " + len(task12cities) + ", " + len(task12diff))
 
         for line in record:
             for col in line:
@@ -351,16 +354,18 @@ def checktask(_task, dbcursor):
                     foundpopulation2012 += 1
                     break
             for col in line:
-                if col in task12diff:
+                if col in task12diff or -col in task12diff:
                     founddiff += 1
                     break
             index += 1
+        print(issorted + ", cities: " + foundcities + ", 2012:" + foundpopulation2012
+              + ", 2011: " + foundpopulation2011 + + ", diff: " + founddiff)
         points = 5
         if not issorted: points -= 1
-        if foundcities != 8: points -= 1
-        if foundpopulation2012 != 8: points -= 1
-        if foundpopulation2011 != 8: points -= 1
-        if founddiff != 8: points -= 1
+        if foundcities != 1307: points -= 1
+        if foundpopulation2012 != 1307: points -= 1
+        if foundpopulation2011 != 1307: points -= 1
+        if founddiff != 1307: points -= 1
         return points
     elif _task == 13:
         # Zistite počet obcí, ktorých počet obyvateľov v roku 2012 je nižší,
