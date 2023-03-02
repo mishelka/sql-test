@@ -358,7 +358,7 @@ def checktask(_task, dbcursor):
                     founddiff += 1
                     break
             index += 1
-        print(f'sorted: {issorted}, cities: {foundcities}, 2012: {foundpopulation2012}, 2011: {foundpopulation2011}, diff: {founddiff}')
+        print(f'sorted: {"true" if issorted else "false"}, cities: {foundcities}, 2012: {foundpopulation2012}, 2011: {foundpopulation2011}, diff: {founddiff}')
         points = 5
         if not issorted: points -= 1
         if foundcities != 1307: points -= 1
