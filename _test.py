@@ -354,15 +354,13 @@ def checktask(_task, dbcursor):
                     foundpopulation2012 += 1
                     break
             for col in line:
-                if col in task12diff:
-                    founddiff += 1
-                    break
+                for diff in task12diff:
+                    if diff == col or -diff == col:
+                        founddiff += 1
+                        break
                 else:
-                    try:
-                        if -int(col) in task12diff:
-                            founddiff += 1
-                            break
-                    except ValueError: break # do nothing
+                    continue
+                break
             index += 1
         print(f'sorted: {"true" if issorted else "false"}, cities: {foundcities}, 2012: {foundpopulation2012}, 2011: {foundpopulation2011}, diff: {founddiff}')
         points = 5
